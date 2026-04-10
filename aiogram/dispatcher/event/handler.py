@@ -112,12 +112,4 @@ class HandlerObject(CallableObject):
         self.flags.update(extract_flags_from_object(callback))
 
     async def check(self, *args: Any, **kwargs: Any) -> tuple[bool, dict[str, Any]]:
-        if not self.filters:
-            return True, kwargs
-        for event_filter in self.filters:
-            check = await event_filter.call(*args, **kwargs)
-            if not check:
-                return False, kwargs
-            if isinstance(check, dict):
-                kwargs.update(check)
-        return True, kwargs
+        pass

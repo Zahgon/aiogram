@@ -113,16 +113,7 @@ class ChatJoinRequest(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.approve_chat_join_request.ApproveChatJoinRequest`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import ApproveChatJoinRequest
-
-        return ApproveChatJoinRequest(
-            chat_id=self.chat.id,
-            user_id=self.from_user.id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def decline(
         self,
@@ -141,16 +132,7 @@ class ChatJoinRequest(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.decline_chat_join_request.DeclineChatJoinRequest`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import DeclineChatJoinRequest
-
-        return DeclineChatJoinRequest(
-            chat_id=self.chat.id,
-            user_id=self.from_user.id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer(
         self,
@@ -202,32 +184,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_message.SendMessage`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendMessage
-
-        return SendMessage(
-            chat_id=self.chat.id,
-            text=text,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            parse_mode=parse_mode,
-            entities=entities,
-            link_preview_options=link_preview_options,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            disable_web_page_preview=disable_web_page_preview,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_pm(
         self,
@@ -279,32 +236,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_message.SendMessage`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendMessage
-
-        return SendMessage(
-            chat_id=self.user_chat_id,
-            text=text,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            parse_mode=parse_mode,
-            entities=entities,
-            link_preview_options=link_preview_options,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            disable_web_page_preview=disable_web_page_preview,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_animation(
         self,
@@ -366,37 +298,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_animation.SendAnimation`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendAnimation
-
-        return SendAnimation(
-            chat_id=self.chat.id,
-            animation=animation,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_animation_pm(
         self,
@@ -458,37 +360,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_animation.SendAnimation`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendAnimation
-
-        return SendAnimation(
-            chat_id=self.user_chat_id,
-            animation=animation,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_audio(
         self,
@@ -547,35 +419,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_audio.SendAudio`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendAudio
-
-        return SendAudio(
-            chat_id=self.chat.id,
-            audio=audio,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            performer=performer,
-            title=title,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_audio_pm(
         self,
@@ -634,35 +478,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_audio.SendAudio`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendAudio
-
-        return SendAudio(
-            chat_id=self.user_chat_id,
-            audio=audio,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            performer=performer,
-            title=title,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_contact(
         self,
@@ -712,31 +528,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_contact.SendContact`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendContact
-
-        return SendContact(
-            chat_id=self.chat.id,
-            phone_number=phone_number,
-            first_name=first_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            last_name=last_name,
-            vcard=vcard,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_contact_pm(
         self,
@@ -786,31 +578,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_contact.SendContact`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendContact
-
-        return SendContact(
-            chat_id=self.user_chat_id,
-            phone_number=phone_number,
-            first_name=first_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            last_name=last_name,
-            vcard=vcard,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_document(
         self,
@@ -864,33 +632,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_document.SendDocument`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendDocument
-
-        return SendDocument(
-            chat_id=self.chat.id,
-            document=document,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            disable_content_type_detection=disable_content_type_detection,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_document_pm(
         self,
@@ -944,33 +686,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_document.SendDocument`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendDocument
-
-        return SendDocument(
-            chat_id=self.user_chat_id,
-            document=document,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            disable_content_type_detection=disable_content_type_detection,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_game(
         self,
@@ -1010,26 +726,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_game.SendGame`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendGame
-
-        return SendGame(
-            chat_id=self.chat.id,
-            game_short_name=game_short_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_game_pm(
         self,
@@ -1069,26 +766,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_game.SendGame`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendGame
-
-        return SendGame(
-            chat_id=self.user_chat_id,
-            game_short_name=game_short_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_invoice(
         self,
@@ -1170,47 +848,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_invoice.SendInvoice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendInvoice
-
-        return SendInvoice(
-            chat_id=self.chat.id,
-            title=title,
-            description=description,
-            payload=payload,
-            currency=currency,
-            prices=prices,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            provider_token=provider_token,
-            max_tip_amount=max_tip_amount,
-            suggested_tip_amounts=suggested_tip_amounts,
-            start_parameter=start_parameter,
-            provider_data=provider_data,
-            photo_url=photo_url,
-            photo_size=photo_size,
-            photo_width=photo_width,
-            photo_height=photo_height,
-            need_name=need_name,
-            need_phone_number=need_phone_number,
-            need_email=need_email,
-            need_shipping_address=need_shipping_address,
-            send_phone_number_to_provider=send_phone_number_to_provider,
-            send_email_to_provider=send_email_to_provider,
-            is_flexible=is_flexible,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_invoice_pm(
         self,
@@ -1292,47 +930,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_invoice.SendInvoice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendInvoice
-
-        return SendInvoice(
-            chat_id=self.user_chat_id,
-            title=title,
-            description=description,
-            payload=payload,
-            currency=currency,
-            prices=prices,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            provider_token=provider_token,
-            max_tip_amount=max_tip_amount,
-            suggested_tip_amounts=suggested_tip_amounts,
-            start_parameter=start_parameter,
-            provider_data=provider_data,
-            photo_url=photo_url,
-            photo_size=photo_size,
-            photo_width=photo_width,
-            photo_height=photo_height,
-            need_name=need_name,
-            need_phone_number=need_phone_number,
-            need_email=need_email,
-            need_shipping_address=need_shipping_address,
-            send_phone_number_to_provider=send_phone_number_to_provider,
-            send_email_to_provider=send_email_to_provider,
-            is_flexible=is_flexible,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_location(
         self,
@@ -1386,33 +984,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_location.SendLocation`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendLocation
-
-        return SendLocation(
-            chat_id=self.chat.id,
-            latitude=latitude,
-            longitude=longitude,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            horizontal_accuracy=horizontal_accuracy,
-            live_period=live_period,
-            heading=heading,
-            proximity_alert_radius=proximity_alert_radius,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_location_pm(
         self,
@@ -1466,33 +1038,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_location.SendLocation`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendLocation
-
-        return SendLocation(
-            chat_id=self.user_chat_id,
-            latitude=latitude,
-            longitude=longitude,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            horizontal_accuracy=horizontal_accuracy,
-            live_period=live_period,
-            heading=heading,
-            proximity_alert_radius=proximity_alert_radius,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_media_group(
         self,
@@ -1532,26 +1078,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the messages are a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_media_group.SendMediaGroup`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendMediaGroup
-
-        return SendMediaGroup(
-            chat_id=self.chat.id,
-            media=media,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_media_group_pm(
         self,
@@ -1591,26 +1118,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the messages are a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_media_group.SendMediaGroup`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendMediaGroup
-
-        return SendMediaGroup(
-            chat_id=self.user_chat_id,
-            media=media,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_photo(
         self,
@@ -1664,33 +1172,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_photo.SendPhoto`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPhoto
-
-        return SendPhoto(
-            chat_id=self.chat.id,
-            photo=photo,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_photo_pm(
         self,
@@ -1744,33 +1226,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_photo.SendPhoto`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPhoto
-
-        return SendPhoto(
-            chat_id=self.user_chat_id,
-            photo=photo,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_poll(
         self,
@@ -1852,47 +1308,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_poll.SendPoll`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPoll
-
-        return SendPoll(
-            chat_id=self.chat.id,
-            question=question,
-            options=options,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            question_parse_mode=question_parse_mode,
-            question_entities=question_entities,
-            is_anonymous=is_anonymous,
-            type=type,
-            allows_multiple_answers=allows_multiple_answers,
-            allows_revoting=allows_revoting,
-            shuffle_options=shuffle_options,
-            allow_adding_options=allow_adding_options,
-            hide_results_until_closes=hide_results_until_closes,
-            correct_option_ids=correct_option_ids,
-            explanation=explanation,
-            explanation_parse_mode=explanation_parse_mode,
-            explanation_entities=explanation_entities,
-            open_period=open_period,
-            close_date=close_date,
-            is_closed=is_closed,
-            description=description,
-            description_parse_mode=description_parse_mode,
-            description_entities=description_entities,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            correct_option_id=correct_option_id,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_poll_pm(
         self,
@@ -1974,47 +1390,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_poll.SendPoll`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPoll
-
-        return SendPoll(
-            chat_id=self.user_chat_id,
-            question=question,
-            options=options,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            question_parse_mode=question_parse_mode,
-            question_entities=question_entities,
-            is_anonymous=is_anonymous,
-            type=type,
-            allows_multiple_answers=allows_multiple_answers,
-            allows_revoting=allows_revoting,
-            shuffle_options=shuffle_options,
-            allow_adding_options=allow_adding_options,
-            hide_results_until_closes=hide_results_until_closes,
-            correct_option_ids=correct_option_ids,
-            explanation=explanation,
-            explanation_parse_mode=explanation_parse_mode,
-            explanation_entities=explanation_entities,
-            open_period=open_period,
-            close_date=close_date,
-            is_closed=is_closed,
-            description=description,
-            description_parse_mode=description_parse_mode,
-            description_entities=description_entities,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            correct_option_id=correct_option_id,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_dice(
         self,
@@ -2058,28 +1434,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_dice.SendDice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendDice
-
-        return SendDice(
-            chat_id=self.chat.id,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_dice_pm(
         self,
@@ -2123,28 +1478,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_dice.SendDice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendDice
-
-        return SendDice(
-            chat_id=self.user_chat_id,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_sticker(
         self,
@@ -2190,29 +1524,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_sticker.SendSticker`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendSticker
-
-        return SendSticker(
-            chat_id=self.chat.id,
-            sticker=sticker,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_sticker_pm(
         self,
@@ -2258,29 +1570,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_sticker.SendSticker`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendSticker
-
-        return SendSticker(
-            chat_id=self.user_chat_id,
-            sticker=sticker,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_venue(
         self,
@@ -2338,35 +1628,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_venue.SendVenue`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVenue
-
-        return SendVenue(
-            chat_id=self.chat.id,
-            latitude=latitude,
-            longitude=longitude,
-            title=title,
-            address=address,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            foursquare_id=foursquare_id,
-            foursquare_type=foursquare_type,
-            google_place_id=google_place_id,
-            google_place_type=google_place_type,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_venue_pm(
         self,
@@ -2424,35 +1686,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_venue.SendVenue`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVenue
-
-        return SendVenue(
-            chat_id=self.user_chat_id,
-            latitude=latitude,
-            longitude=longitude,
-            title=title,
-            address=address,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            foursquare_id=foursquare_id,
-            foursquare_type=foursquare_type,
-            google_place_id=google_place_id,
-            google_place_type=google_place_type,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_video(
         self,
@@ -2520,40 +1754,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_video.SendVideo`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVideo
-
-        return SendVideo(
-            chat_id=self.chat.id,
-            video=video,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            cover=cover,
-            start_timestamp=start_timestamp,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            supports_streaming=supports_streaming,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_video_pm(
         self,
@@ -2621,40 +1822,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_video.SendVideo`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVideo
-
-        return SendVideo(
-            chat_id=self.user_chat_id,
-            video=video,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            cover=cover,
-            start_timestamp=start_timestamp,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            supports_streaming=supports_streaming,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_video_note(
         self,
@@ -2704,31 +1872,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_video_note.SendVideoNote`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVideoNote
-
-        return SendVideoNote(
-            chat_id=self.chat.id,
-            video_note=video_note,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            length=length,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_video_note_pm(
         self,
@@ -2778,31 +1922,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_video_note.SendVideoNote`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVideoNote
-
-        return SendVideoNote(
-            chat_id=self.user_chat_id,
-            video_note=video_note,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            length=length,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_voice(
         self,
@@ -2854,32 +1974,7 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_voice.SendVoice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVoice
-
-        return SendVoice(
-            chat_id=self.chat.id,
-            voice=voice,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_voice_pm(
         self,
@@ -2931,29 +2026,4 @@ class ChatJoinRequest(TelegramObject):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_voice.SendVoice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVoice
-
-        return SendVoice(
-            chat_id=self.user_chat_id,
-            voice=voice,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass

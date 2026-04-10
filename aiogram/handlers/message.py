@@ -13,16 +13,14 @@ class MessageHandler(BaseHandler[Message], ABC):
 
     @property
     def from_user(self) -> User | None:
-        return self.event.from_user
+        pass
 
     @property
     def chat(self) -> Chat:
-        return self.event.chat
+        pass
 
 
 class MessageHandlerCommandMixin(BaseHandlerMixin[Message]):
     @property
     def command(self) -> CommandObject | None:
-        if "command" in self.data:
-            return cast(CommandObject, self.data["command"])
-        return None
+        pass

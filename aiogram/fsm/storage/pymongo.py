@@ -54,14 +54,11 @@ class PyMongoStorage(BaseStorage):
         :param kwargs: arguments to be passed to :class:`PyMongoStorage`
         :return: an instance of :class:`PyMongoStorage`
         """
-        if connection_kwargs is None:
-            connection_kwargs = {}
-        client: AsyncMongoClient[Any] = AsyncMongoClient(url, **connection_kwargs)
-        return cls(client=client, **kwargs)
+        pass
 
     async def close(self) -> None:
         """Cleanup client resources and disconnect from MongoDB."""
-        return await self._client.close()
+        pass
 
     def resolve_state(self, value: StateType) -> str | None:
         if value is None:

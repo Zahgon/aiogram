@@ -16,6 +16,6 @@ def lru_cache(maxsize: int = 128, typed: bool = False) -> Callable[[T], T]:
     """
 
     def wrapper(func: T) -> T:
-        return functools.lru_cache(maxsize, typed)(func)  # type: ignore
+        pass
 
     return wrapper

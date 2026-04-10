@@ -25,7 +25,7 @@ class CallbackQueryHandler(BaseHandler[CallbackQuery], ABC):
         """
         Is alias for `event.from_user`
         """
-        return self.event.from_user
+        pass
 
     @property
     def message(self) -> MaybeInaccessibleMessage | None:
@@ -39,4 +39,4 @@ class CallbackQueryHandler(BaseHandler[CallbackQuery], ABC):
         """
         Is alias for `event.data`
         """
-        return self.event.data
+        pass

@@ -4,7 +4,7 @@ from .text_decorations import html_decoration, markdown_decoration
 
 
 def _join(*content: Any, sep: str = " ") -> str:
-    return sep.join(map(str, content))
+    pass
 
 
 def text(*content: Any, sep: str = " ") -> str:
@@ -15,7 +15,7 @@ def text(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return _join(*content, sep=sep)
+    pass
 
 
 def bold(*content: Any, sep: str = " ") -> str:
@@ -26,7 +26,7 @@ def bold(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return markdown_decoration.bold(value=markdown_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def hbold(*content: Any, sep: str = " ") -> str:
@@ -37,7 +37,7 @@ def hbold(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return html_decoration.bold(value=html_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def italic(*content: Any, sep: str = " ") -> str:
@@ -48,7 +48,7 @@ def italic(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return markdown_decoration.italic(value=markdown_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def hitalic(*content: Any, sep: str = " ") -> str:
@@ -59,7 +59,7 @@ def hitalic(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return html_decoration.italic(value=html_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def code(*content: Any, sep: str = " ") -> str:
@@ -70,7 +70,7 @@ def code(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return markdown_decoration.code(value=markdown_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def hcode(*content: Any, sep: str = " ") -> str:
@@ -81,7 +81,7 @@ def hcode(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return html_decoration.code(value=html_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def pre(*content: Any, sep: str = "\n") -> str:
@@ -92,7 +92,7 @@ def pre(*content: Any, sep: str = "\n") -> str:
     :param sep:
     :return:
     """
-    return markdown_decoration.pre(value=markdown_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def hpre(*content: Any, sep: str = "\n") -> str:
@@ -103,7 +103,7 @@ def hpre(*content: Any, sep: str = "\n") -> str:
     :param sep:
     :return:
     """
-    return html_decoration.pre(value=html_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def underline(*content: Any, sep: str = " ") -> str:
@@ -114,7 +114,7 @@ def underline(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return markdown_decoration.underline(value=markdown_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def hunderline(*content: Any, sep: str = " ") -> str:
@@ -125,7 +125,7 @@ def hunderline(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return html_decoration.underline(value=html_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def strikethrough(*content: Any, sep: str = " ") -> str:
@@ -136,9 +136,7 @@ def strikethrough(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return markdown_decoration.strikethrough(
-        value=markdown_decoration.quote(_join(*content, sep=sep)),
-    )
+    pass
 
 
 def hstrikethrough(*content: Any, sep: str = " ") -> str:
@@ -149,7 +147,7 @@ def hstrikethrough(*content: Any, sep: str = " ") -> str:
     :param sep:
     :return:
     """
-    return html_decoration.strikethrough(value=html_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def link(title: str, url: str) -> str:
@@ -160,7 +158,7 @@ def link(title: str, url: str) -> str:
     :param url:
     :return:
     """
-    return markdown_decoration.link(value=markdown_decoration.quote(title), link=url)
+    pass
 
 
 def hlink(title: str, url: str) -> str:
@@ -171,7 +169,7 @@ def hlink(title: str, url: str) -> str:
     :param url:
     :return:
     """
-    return html_decoration.link(value=html_decoration.quote(title), link=url)
+    pass
 
 
 def blockquote(*content: Any, sep: str = "\n") -> str:
@@ -182,9 +180,7 @@ def blockquote(*content: Any, sep: str = "\n") -> str:
     :param sep:
     :return:
     """
-    return markdown_decoration.blockquote(
-        value=markdown_decoration.quote(_join(*content, sep=sep)),
-    )
+    pass
 
 
 def hblockquote(*content: Any, sep: str = "\n") -> str:
@@ -195,7 +191,7 @@ def hblockquote(*content: Any, sep: str = "\n") -> str:
     :param sep:
     :return:
     """
-    return html_decoration.blockquote(value=html_decoration.quote(_join(*content, sep=sep)))
+    pass
 
 
 def hide_link(url: str) -> str:
@@ -206,4 +202,4 @@ def hide_link(url: str) -> str:
     :param url:
     :return:
     """
-    return f'<a href="{url}">&#8203;</a>'
+    pass

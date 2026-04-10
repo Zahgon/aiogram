@@ -21,11 +21,11 @@ def docs_url(*path: str, fragment_: str | None = None, **query: Any) -> str:
 
 
 def create_tg_link(link: str, **kwargs: Any) -> str:
-    return _format_url(f"tg://{link}", **kwargs)
+    pass
 
 
 def create_telegram_link(*path: str, **kwargs: Any) -> str:
-    return _format_url("https://t.me", *path, **kwargs)
+    pass
 
 
 def create_channel_bot_link(
@@ -43,32 +43,4 @@ def create_channel_bot_link(
     anonymous: bool = False,
     manage_chat: bool = False,
 ) -> str:
-    params = {}
-    if parameter is not None:
-        params["startgroup"] = parameter
-    permissions = []
-    if change_info:
-        permissions.append("change_info")
-    if post_messages:
-        permissions.append("post_messages")
-    if edit_messages:
-        permissions.append("edit_messages")
-    if delete_messages:
-        permissions.append("delete_messages")
-    if restrict_members:
-        permissions.append("restrict_members")
-    if invite_users:
-        permissions.append("invite_users")
-    if pin_messages:
-        permissions.append("pin_messages")
-    if promote_members:
-        permissions.append("promote_members")
-    if manage_video_chats:
-        permissions.append("manage_video_chats")
-    if anonymous:
-        permissions.append("anonymous")
-    if manage_chat:
-        permissions.append("manage_chat")
-    if permissions:
-        params["admin"] = "+".join(permissions)
-    return create_telegram_link(username, **params)
+    pass

@@ -67,16 +67,10 @@ class BufferedInputFile(InputFile):
         :param chunk_size: Uploading chunk size
         :return: instance of :obj:`BufferedInputFile`
         """
-        if filename is None:
-            filename = os.path.basename(path)
-        with open(path, "rb") as f:
-            data = f.read()
-        return cls(data, filename=filename, chunk_size=chunk_size)
+        pass
 
     async def read(self, bot: Bot) -> AsyncGenerator[bytes, None]:
-        buffer = io.BytesIO(self.data)
-        while chunk := buffer.read(self.chunk_size):
-            yield chunk
+        pass
 
 
 class FSInputFile(InputFile):
@@ -101,9 +95,7 @@ class FSInputFile(InputFile):
         self.path = path
 
     async def read(self, bot: Bot) -> AsyncGenerator[bytes, None]:
-        async with aiofiles.open(self.path, "rb") as f:
-            while chunk := await f.read(self.chunk_size):
-                yield chunk
+        pass
 
 
 class URLInputFile(InputFile):
@@ -137,14 +129,4 @@ class URLInputFile(InputFile):
         self.bot = bot
 
     async def read(self, bot: Bot) -> AsyncGenerator[bytes, None]:
-        bot = self.bot or bot
-        stream = bot.session.stream_content(
-            url=self.url,
-            headers=self.headers,
-            timeout=self.timeout,
-            chunk_size=self.chunk_size,
-            raise_for_status=True,
-        )
-
-        async for chunk in stream:
-            yield chunk
+        pass

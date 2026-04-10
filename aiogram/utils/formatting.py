@@ -20,7 +20,7 @@ NodeType = Any
 
 
 def sizeof(value: str) -> int:
-    return len(value.encode("utf-16-le")) // 2
+    pass
 
 
 class Text(Iterable[NodeType]):
@@ -42,12 +42,7 @@ class Text(Iterable[NodeType]):
 
     @classmethod
     def from_entities(cls, text: str, entities: list[MessageEntity]) -> Text:
-        return cls(
-            *_unparse_entities(
-                text=add_surrogates(text),
-                entities=sorted(entities, key=lambda item: item.offset) if entities else [],
-            ),
-        )
+        pass
 
     def render(
         self,
@@ -61,38 +56,10 @@ class Text(Iterable[NodeType]):
 
         :return:
         """
-
-        text = ""
-        entities = []
-        offset = _offset
-
-        for node in self._body:
-            if not isinstance(node, Text):
-                node = str(node)
-                text += node
-                offset += sizeof(node)
-            else:
-                node_text, node_entities = node.render(
-                    _offset=offset,
-                    _sort=False,
-                    _collect_entities=_collect_entities,
-                )
-                text += node_text
-                offset += sizeof(node_text)
-                if _collect_entities:
-                    entities.extend(node_entities)
-
-        if _collect_entities and self.type:
-            entities.append(self._render_entity(offset=_offset, length=offset - _offset))
-
-        if _collect_entities and _sort:
-            entities.sort(key=lambda entity: entity.offset)
-
-        return text, entities
+        pass
 
     def _render_entity(self, *, offset: int, length: int) -> MessageEntity:
-        assert self.type is not None, "Node without type can't be rendered as entity"
-        return MessageEntity(type=self.type, offset=offset, length=length, **self._params)
+        pass
 
     def as_kwargs(
         self,
@@ -116,14 +83,7 @@ class Text(Iterable[NodeType]):
         :param parse_mode_key:
         :return:
         """
-        text_value, entities_value = self.render()
-        result: dict[str, Any] = {
-            text_key: text_value,
-            entities_key: entities_value,
-        }
-        if replace_parse_mode:
-            result[parse_mode_key] = None
-        return result
+        pass
 
     def as_caption_kwargs(self, *, replace_parse_mode: bool = True) -> dict[str, Any]:
         """
@@ -138,11 +98,7 @@ class Text(Iterable[NodeType]):
         :param replace_parse_mode: Will be passed to :meth:`as_kwargs`.
         :return:
         """
-        return self.as_kwargs(
-            text_key="caption",
-            entities_key="caption_entities",
-            replace_parse_mode=replace_parse_mode,
-        )
+        pass
 
     def as_poll_question_kwargs(self, *, replace_parse_mode: bool = True) -> dict[str, Any]:
         """
@@ -157,12 +113,7 @@ class Text(Iterable[NodeType]):
         :param replace_parse_mode: Will be passed to :meth:`as_kwargs`.
         :return:
         """
-        return self.as_kwargs(
-            text_key="question",
-            entities_key="question_entities",
-            parse_mode_key="question_parse_mode",
-            replace_parse_mode=replace_parse_mode,
-        )
+        pass
 
     def as_poll_explanation_kwargs(self, *, replace_parse_mode: bool = True) -> dict[str, Any]:
         """
@@ -182,12 +133,7 @@ class Text(Iterable[NodeType]):
         :param replace_parse_mode: Will be passed to :meth:`as_kwargs`.
         :return:
         """
-        return self.as_kwargs(
-            text_key="explanation",
-            entities_key="explanation_entities",
-            parse_mode_key="explanation_parse_mode",
-            replace_parse_mode=replace_parse_mode,
-        )
+        pass
 
     def as_gift_text_kwargs(self, *, replace_parse_mode: bool = True) -> dict[str, Any]:
         """
@@ -202,48 +148,25 @@ class Text(Iterable[NodeType]):
         :param replace_parse_mode: Will be passed to :meth:`as_kwargs`.
         :return:
         """
-        return self.as_kwargs(
-            text_key="text",
-            entities_key="text_entities",
-            parse_mode_key="text_parse_mode",
-            replace_parse_mode=replace_parse_mode,
-        )
+        pass
 
     def as_html(self) -> str:
         """
         Render elements tree as HTML markup
         """
-        text, entities = self.render()
-        return html_decoration.unparse(text, entities)
+        pass
 
     def as_markdown(self) -> str:
         """
         Render elements tree as MarkdownV2 markup
         """
-        text, entities = self.render()
-        return markdown_decoration.unparse(text, entities)
+        pass
 
     def replace(self: Self, *args: Any, **kwargs: Any) -> Self:
-        return type(self)(*args, **{**self._params, **kwargs})
+        pass
 
     def as_pretty_string(self, indent: bool = False) -> str:
-        sep = ",\n" if indent else ", "
-        body = sep.join(
-            item.as_pretty_string(indent=indent) if isinstance(item, Text) else repr(item)
-            for item in self._body
-        )
-        params = sep.join(f"{k}={v!r}" for k, v in self._params.items() if v is not None)
-
-        args = []
-        if body:
-            args.append(body)
-        if params:
-            args.append(params)
-
-        args_str = sep.join(args)
-        if indent:
-            args_str = textwrap.indent("\n" + args_str + "\n", "    ")
-        return f"{type(self).__name__}({args_str})"
+        pass
 
     def __add__(self, other: NodeType) -> Text:
         if isinstance(other, Text) and other.type == self.type and self._params == other._params:
@@ -587,11 +510,7 @@ def _apply_entity(entity: MessageEntity, *nodes: NodeType) -> NodeType:
     :param text:
     :return:
     """
-    node_type = NODE_TYPES.get(entity.type, Text)
-    return node_type(
-        *nodes,
-        **entity.model_dump(exclude={"type", "offset", "length"}, warnings=False),
-    )
+    pass
 
 
 def _unparse_entities(
@@ -600,26 +519,7 @@ def _unparse_entities(
     offset: int | None = None,
     length: int | None = None,
 ) -> Generator[NodeType, None, None]:
-    if offset is None:
-        offset = 0
-    length = length or len(text)
-
-    for index, entity in enumerate(entities):
-        if entity.offset * 2 < offset:
-            continue
-        if entity.offset * 2 > offset:
-            yield remove_surrogates(text[offset : entity.offset * 2])
-        start = entity.offset * 2
-        offset = entity.offset * 2 + entity.length * 2
-
-        sub_entities = list(filter(lambda e: e.offset * 2 < (offset or 0), entities[index + 1 :]))
-        yield _apply_entity(
-            entity,
-            *_unparse_entities(text, sub_entities, offset=start, length=offset),
-        )
-
-    if offset < length:
-        yield remove_surrogates(text[offset:length])
+    pass
 
 
 def as_line(*items: NodeType, end: str = "\n", sep: str = "") -> Text:
@@ -631,14 +531,7 @@ def as_line(*items: NodeType, end: str = "\n", sep: str = "") -> Text:
     :param sep: separator between items, by default is empty string
     :return: Text
     """
-    if sep:
-        nodes = []
-        for item in items[:-1]:
-            nodes.extend([item, sep])
-        nodes.extend([items[-1], end])
-    else:
-        nodes = [*items, end]
-    return Text(*nodes)
+    pass
 
 
 def as_list(*items: NodeType, sep: str = "\n") -> Text:
@@ -649,11 +542,7 @@ def as_list(*items: NodeType, sep: str = "\n") -> Text:
     :param sep:
     :return:
     """
-    nodes = []
-    for item in items[:-1]:
-        nodes.extend([item, sep])
-    nodes.append(items[-1])
-    return Text(*nodes)
+    pass
 
 
 def as_marked_list(*items: NodeType, marker: str = "- ") -> Text:
@@ -664,7 +553,7 @@ def as_marked_list(*items: NodeType, marker: str = "- ") -> Text:
     :param marker: line marker, by default is '- '
     :return: Text
     """
-    return as_list(*(Text(marker, item) for item in items))
+    pass
 
 
 def as_numbered_list(*items: NodeType, start: int = 1, fmt: str = "{}. ") -> Text:
@@ -676,7 +565,7 @@ def as_numbered_list(*items: NodeType, start: int = 1, fmt: str = "{}. ") -> Tex
     :param fmt: number format, by default '{}. '
     :return: Text
     """
-    return as_list(*(Text(fmt.format(index), item) for index, item in enumerate(items, start)))
+    pass
 
 
 def as_section(title: NodeType, *body: NodeType) -> Text:
@@ -687,7 +576,7 @@ def as_section(title: NodeType, *body: NodeType) -> Text:
     :param body:
     :return: Text
     """
-    return Text(title, "\n", *body)
+    pass
 
 
 def as_marked_section(
@@ -703,7 +592,7 @@ def as_marked_section(
     :param marker:
     :return:
     """
-    return as_section(title, as_marked_list(*body, marker=marker))
+    pass
 
 
 def as_numbered_section(
@@ -721,7 +610,7 @@ def as_numbered_section(
     :param fmt:
     :return:
     """
-    return as_section(title, as_numbered_list(*body, start=start, fmt=fmt))
+    pass
 
 
 def as_key_value(key: NodeType, value: NodeType) -> Text:
@@ -732,4 +621,4 @@ def as_key_value(key: NodeType, value: NodeType) -> Text:
     :param value:
     :return: Text
     """
-    return Text(Bold(key, ":"), " ", value)
+    pass

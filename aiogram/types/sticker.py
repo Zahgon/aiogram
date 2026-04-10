@@ -114,16 +114,7 @@ class Sticker(TelegramObject):
         :param position: New sticker position in the set, zero-based
         :return: instance of method :class:`aiogram.methods.set_sticker_position_in_set.SetStickerPositionInSet`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SetStickerPositionInSet
-
-        return SetStickerPositionInSet(
-            sticker=self.file_id,
-            position=position,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def delete_from_set(
         self,
@@ -141,12 +132,4 @@ class Sticker(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.delete_sticker_from_set.DeleteStickerFromSet`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import DeleteStickerFromSet
-
-        return DeleteStickerFromSet(
-            sticker=self.file_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass

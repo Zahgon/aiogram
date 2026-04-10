@@ -32,15 +32,14 @@ class EventObserver:
         """
         Register callback with filters
         """
-        self.handlers.append(HandlerObject(callback=callback))
+        pass
 
     async def trigger(self, *args: Any, **kwargs: Any) -> None:
         """
         Propagate event to handlers.
         Handler will be called when all its filters is pass.
         """
-        for handler in self.handlers:
-            await handler.call(*args, **kwargs)
+        pass
 
     def __call__(self) -> Callable[[CallbackType], CallbackType]:
         """
@@ -48,7 +47,6 @@ class EventObserver:
         """
 
         def wrapper(callback: CallbackType) -> CallbackType:
-            self.register(callback)
-            return callback
+            pass
 
         return wrapper

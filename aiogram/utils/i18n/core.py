@@ -29,33 +29,25 @@ class I18n(ContextInstanceMixin["I18n"]):
 
     @property
     def current_locale(self) -> str:
-        return self.ctx_locale.get()
+        pass
 
     @current_locale.setter
     def current_locale(self, value: str) -> None:
-        self.ctx_locale.set(value)
+        pass
 
     @contextmanager
     def use_locale(self, locale: str) -> Generator[None, None, None]:
         """
         Create context with specified locale
         """
-        ctx_token = self.ctx_locale.set(locale)
-        try:
-            yield
-        finally:
-            self.ctx_locale.reset(ctx_token)
+        pass
 
     @contextmanager
     def context(self) -> Generator[I18n, None, None]:
         """
         Use I18n context
         """
-        token = self.set_current(self)
-        try:
-            yield self
-        finally:
-            self.reset_current(token)
+        pass
 
     def find_locales(self) -> dict[str, gettext.GNUTranslations]:
         """
@@ -63,27 +55,13 @@ class I18n(ContextInstanceMixin["I18n"]):
 
         :return: dict with locales
         """
-        translations: dict[str, gettext.GNUTranslations] = {}
-
-        for name in self.path.iterdir():
-            if not name.is_dir():
-                continue
-            mo_path = name / "LC_MESSAGES" / (self.domain + ".mo")
-
-            if mo_path.exists():
-                with mo_path.open("rb") as fp:
-                    translations[name.name] = gettext.GNUTranslations(fp)
-            elif mo_path.with_suffix(".po").exists():  # pragma: no cover
-                msg = f"Found locale '{name.name}' but this language is not compiled!"
-                raise RuntimeError(msg)
-
-        return translations
+        pass
 
     def reload(self) -> None:
         """
         Hot reload locales
         """
-        self.locales = self.find_locales()
+        pass
 
     @property
     def available_locales(self) -> tuple[str, ...]:
@@ -92,7 +70,7 @@ class I18n(ContextInstanceMixin["I18n"]):
 
         :return:
         """
-        return tuple(self.locales.keys())
+        pass
 
     def gettext(
         self,
@@ -110,19 +88,7 @@ class I18n(ContextInstanceMixin["I18n"]):
         :param locale:
         :return:
         """
-        if locale is None:
-            locale = self.current_locale
-
-        if locale not in self.locales:
-            if n == 1:
-                return singular
-            return plural or singular
-
-        translator = self.locales[locale]
-
-        if plural is None:
-            return translator.gettext(singular)
-        return translator.ngettext(singular, plural, n)
+        pass
 
     def lazy_gettext(
         self,
@@ -131,11 +97,4 @@ class I18n(ContextInstanceMixin["I18n"]):
         n: int = 1,
         locale: str | None = None,
     ) -> LazyProxy:
-        return LazyProxy(
-            self.gettext,
-            singular=singular,
-            plural=plural,
-            n=n,
-            locale=locale,
-            enable_cache=False,
-        )
+        pass

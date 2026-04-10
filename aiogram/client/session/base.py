@@ -83,61 +83,7 @@ class BaseSession(abc.ABC):
         """
         Check response status
         """
-        try:
-            json_data = self.json_loads(content)
-        except Exception as e:  # noqa: BLE001
-            # Handled error type can't be classified as specific error
-            # in due to decoder can be customized and raise any exception
-
-            msg = "Failed to decode object"
-            raise ClientDecodeError(msg, e, content) from e
-
-        try:
-            response_type = Response[method.__returning__]  # type: ignore
-            response = response_type.model_validate(json_data, context={"bot": bot})
-        except ValidationError as e:
-            msg = "Failed to deserialize object"
-            raise ClientDecodeError(msg, e, json_data) from e
-
-        if HTTPStatus.OK <= status_code <= HTTPStatus.IM_USED and response.ok:
-            return response
-
-        description = cast(str, response.description)
-
-        if parameters := response.parameters:
-            if parameters.retry_after:
-                raise TelegramRetryAfter(
-                    method=method,
-                    message=description,
-                    retry_after=parameters.retry_after,
-                )
-            if parameters.migrate_to_chat_id:
-                raise TelegramMigrateToChat(
-                    method=method,
-                    message=description,
-                    migrate_to_chat_id=parameters.migrate_to_chat_id,
-                )
-        if status_code == HTTPStatus.BAD_REQUEST:
-            raise TelegramBadRequest(method=method, message=description)
-        if status_code == HTTPStatus.NOT_FOUND:
-            raise TelegramNotFound(method=method, message=description)
-        if status_code == HTTPStatus.CONFLICT:
-            raise TelegramConflictError(method=method, message=description)
-        if status_code == HTTPStatus.UNAUTHORIZED:
-            raise TelegramUnauthorizedError(method=method, message=description)
-        if status_code == HTTPStatus.FORBIDDEN:
-            raise TelegramForbiddenError(method=method, message=description)
-        if status_code == HTTPStatus.REQUEST_ENTITY_TOO_LARGE:
-            raise TelegramEntityTooLarge(method=method, message=description)
-        if status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
-            if "restart" in description:
-                raise RestartingTelegram(method=method, message=description)
-            raise TelegramServerError(method=method, message=description)
-
-        raise TelegramAPIError(
-            method=method,
-            message=description,
-        )
+        pass
 
     @abc.abstractmethod
     async def close(self) -> None:  # pragma: no cover
@@ -186,68 +132,7 @@ class BaseSession(abc.ABC):
         """
         Prepare value before send
         """
-        if value is None:
-            return None
-        if isinstance(value, str):
-            return value
-        if isinstance(value, Default):
-            default_value = bot.default[value.name]
-            return self.prepare_value(default_value, bot=bot, files=files, _dumps_json=_dumps_json)
-        if isinstance(value, InputFile):
-            key = secrets.token_urlsafe(10)
-            files[key] = value
-            return f"attach://{key}"
-        if isinstance(value, dict):
-            value = {
-                key: prepared_item
-                for key, item in value.items()
-                if (
-                    prepared_item := self.prepare_value(
-                        item,
-                        bot=bot,
-                        files=files,
-                        _dumps_json=False,
-                    )
-                )
-                is not None
-            }
-            if _dumps_json:
-                return self.json_dumps(value)
-            return value
-        if isinstance(value, list):
-            value = [
-                prepared_item
-                for item in value
-                if (
-                    prepared_item := self.prepare_value(
-                        item,
-                        bot=bot,
-                        files=files,
-                        _dumps_json=False,
-                    )
-                )
-                is not None
-            ]
-            if _dumps_json:
-                return self.json_dumps(value)
-            return value
-        if isinstance(value, datetime.timedelta):
-            now = datetime.datetime.now()  # noqa: DTZ005
-            return str(round((now + value).timestamp()))
-        if isinstance(value, datetime.datetime):
-            return str(round(value.timestamp()))
-        if isinstance(value, Enum):
-            return self.prepare_value(value.value, bot=bot, files=files)
-        if isinstance(value, TelegramObject):
-            return self.prepare_value(
-                value.model_dump(warnings=False),
-                bot=bot,
-                files=files,
-                _dumps_json=_dumps_json,
-            )
-        if _dumps_json:
-            return self.json_dumps(value)
-        return value
+        pass
 
     async def __call__(
         self,

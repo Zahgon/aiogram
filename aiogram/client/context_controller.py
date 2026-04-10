@@ -13,7 +13,7 @@ class BotContextController(BaseModel):
     _bot: Bot | None = PrivateAttr()
 
     def model_post_init(self, __context: Any) -> None:  # noqa: PYI063
-        self._bot = __context.get("bot") if __context else None
+        pass
 
     def as_(self, bot: Bot | None) -> Self:
         """
@@ -32,4 +32,4 @@ class BotContextController(BaseModel):
 
         :return: Bot instance
         """
-        return self._bot
+        pass

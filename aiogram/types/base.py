@@ -30,9 +30,7 @@ class TelegramObject(BotContextController, BaseModel):
         but UNSET might be passed to a model initialization from `Bot.method_name`,
         so we must take care of it and remove it before fields validation.
         """
-        if not isinstance(values, dict):
-            return values
-        return {k: v for k, v in values.items() if not isinstance(v, UNSET_TYPE)}
+        pass
 
 
 class MutableTelegramObject(TelegramObject):

@@ -76,15 +76,4 @@ class ShippingQuery(TelegramObject):
         :param error_message: Required if *ok* is :code:`False`. Error message in human readable form that explains why it is impossible to complete the order (e.g. 'Sorry, delivery to your desired address is unavailable'). Telegram will display this message to the user.
         :return: instance of method :class:`aiogram.methods.answer_shipping_query.AnswerShippingQuery`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import AnswerShippingQuery
-
-        return AnswerShippingQuery(
-            shipping_query_id=self.id,
-            ok=ok,
-            shipping_options=shipping_options,
-            error_message=error_message,
-            **kwargs,
-        ).as_(self._bot)
+        pass

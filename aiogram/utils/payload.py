@@ -78,14 +78,7 @@ def encode_payload(
 
     Result also will be encoded with URL-safe base64url.
     """
-    if not isinstance(payload, str):
-        payload = str(payload)
-
-    payload_bytes = payload.encode("utf-8")
-    if encoder is not None:
-        payload_bytes = encoder(payload_bytes)
-
-    return _encode_b64(payload_bytes)
+    pass
 
 
 def decode_payload(
@@ -93,22 +86,14 @@ def decode_payload(
     decoder: Callable[[bytes], bytes] | None = None,
 ) -> str:
     """Decode URL-safe base64url payload with decoder."""
-    original_payload = _decode_b64(payload)
-
-    if decoder is None:
-        return original_payload.decode()
-
-    return decoder(original_payload).decode()
+    pass
 
 
 def _encode_b64(payload: bytes) -> str:
     """Encode with URL-safe base64url."""
-    bytes_payload: bytes = urlsafe_b64encode(payload)
-    str_payload = bytes_payload.decode()
-    return str_payload.replace("=", "")
+    pass
 
 
 def _decode_b64(payload: str) -> bytes:
     """Decode with URL-safe base64url."""
-    payload += "=" * (4 - len(payload) % 4)
-    return urlsafe_b64decode(payload.encode())
+    pass

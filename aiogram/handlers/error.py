@@ -10,8 +10,8 @@ class ErrorHandler(BaseHandler[Exception], ABC):
 
     @property
     def exception_name(self) -> str:
-        return self.event.__class__.__name__
+        pass
 
     @property
     def exception_message(self) -> str:
-        return str(self.event)
+        pass

@@ -32,40 +32,40 @@ class Backoff:
 
     @property
     def min_delay(self) -> float:
-        return self.config.min_delay
+        pass
 
     @property
     def max_delay(self) -> float:
-        return self.config.max_delay
+        pass
 
     @property
     def factor(self) -> float:
-        return self.config.factor
+        pass
 
     @property
     def jitter(self) -> float:
-        return self.config.jitter
+        pass
 
     @property
     def next_delay(self) -> float:
-        return self._next_delay
+        pass
 
     @property
     def current_delay(self) -> float:
-        return self._current_delay
+        pass
 
     @property
     def counter(self) -> int:
-        return self._counter
+        pass
 
     def sleep(self) -> None:
-        time.sleep(next(self))
+        pass
 
     async def asleep(self) -> None:
-        await asyncio.sleep(next(self))
+        pass
 
     def _calculate_next(self, value: float) -> float:
-        return normalvariate(min(value * self.factor, self.max_delay), self.jitter)
+        pass
 
     def __next__(self) -> float:
         self._current_delay = self._next_delay
@@ -74,9 +74,7 @@ class Backoff:
         return self._current_delay
 
     def reset(self) -> None:
-        self._current_delay = 0.0
-        self._counter = 0
-        self._next_delay = self.min_delay
+        pass
 
     def __str__(self) -> str:
         return (

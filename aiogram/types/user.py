@@ -101,23 +101,17 @@ class User(TelegramObject):
 
     @property
     def full_name(self) -> str:
-        if self.last_name:
-            return f"{self.first_name} {self.last_name}"
-        return self.first_name
+        pass
 
     @property
     def url(self) -> str:
-        return create_tg_link("user", id=self.id)
+        pass
 
     def mention_markdown(self, name: str | None = None) -> str:
-        if name is None:
-            name = self.full_name
-        return markdown.link(name, self.url)
+        pass
 
     def mention_html(self, name: str | None = None) -> str:
-        if name is None:
-            name = self.full_name
-        return markdown.hlink(name, self.url)
+        pass
 
     def get_profile_photos(
         self,
@@ -139,17 +133,7 @@ class User(TelegramObject):
         :param limit: Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to 100.
         :return: instance of method :class:`aiogram.methods.get_user_profile_photos.GetUserProfilePhotos`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import GetUserProfilePhotos
-
-        return GetUserProfilePhotos(
-            user_id=self.id,
-            offset=offset,
-            limit=limit,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def get_profile_audios(
         self,
@@ -171,14 +155,4 @@ class User(TelegramObject):
         :param limit: Limits the number of audios to be retrieved. Values between 1-100 are accepted. Defaults to 100.
         :return: instance of method :class:`aiogram.methods.get_user_profile_audios.GetUserProfileAudios`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import GetUserProfileAudios
-
-        return GetUserProfileAudios(
-            user_id=self.id,
-            offset=offset,
-            limit=limit,
-            **kwargs,
-        ).as_(self._bot)
+        pass

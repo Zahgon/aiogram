@@ -67,14 +67,13 @@ class MemoryStorage(BaseStorage):
         dict_key: str,
         default: Any | None = None,
     ) -> Any | None:
-        data = self.storage[storage_key].data
-        return copy(data.get(dict_key, default))
+        pass
 
 
 class DisabledEventIsolation(BaseEventIsolation):
     @asynccontextmanager
     async def lock(self, key: StorageKey) -> AsyncGenerator[None, None]:
-        yield
+        pass
 
     async def close(self) -> None:
         pass
@@ -87,9 +86,7 @@ class SimpleEventIsolation(BaseEventIsolation):
 
     @asynccontextmanager
     async def lock(self, key: StorageKey) -> AsyncGenerator[None, None]:
-        lock = self._locks[key]
-        async with lock:
-            yield
+        pass
 
     async def close(self) -> None:
-        self._locks.clear()
+        pass

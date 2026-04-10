@@ -28,33 +28,7 @@ def check_webapp_signature(
     :param public_key: Public key
     :return: True if signature is valid, False otherwise
     """
-    try:
-        parsed_data = dict(parse_qsl(init_data, strict_parsing=True))
-    except ValueError:
-        return False
-
-    signature_b64 = parsed_data.pop("signature", None)
-    if not signature_b64:
-        return False
-
-    parsed_data.pop("hash", None)
-
-    data_check_string = f"{bot_id}:WebAppData\n" + "\n".join(
-        f"{k}={v}" for k, v in sorted(parsed_data.items(), key=itemgetter(0))
-    )
-    message = data_check_string.encode()
-
-    padding = "=" * (-len(signature_b64) % 4)
-    signature = base64.urlsafe_b64decode(signature_b64 + padding)
-
-    public_key = Ed25519PublicKey.from_public_bytes(public_key_bytes)
-
-    try:
-        public_key.verify(signature, message)
-    except InvalidSignature:
-        return False
-    else:
-        return True
+    pass
 
 
 def safe_check_webapp_init_data_from_signature(
@@ -70,7 +44,4 @@ def safe_check_webapp_init_data_from_signature(
     :param public_key_bytes: public key
     :return: WebAppInitData object
     """
-    if check_webapp_signature(bot_id, init_data, public_key_bytes):
-        return parse_webapp_init_data(init_data)
-    msg = "Invalid init data signature"
-    raise ValueError(msg)
+    pass

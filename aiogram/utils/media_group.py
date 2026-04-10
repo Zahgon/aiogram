@@ -127,18 +127,7 @@ class MediaGroupBuilder:
                 The available keyword arguments depend on the media type.
         :return: None
         """
-        type_ = kwargs.pop("type", None)
-        if type_ == InputMediaType.AUDIO:
-            self.add_audio(**kwargs)
-        elif type_ == InputMediaType.PHOTO:
-            self.add_photo(**kwargs)
-        elif type_ == InputMediaType.VIDEO:
-            self.add_video(**kwargs)
-        elif type_ == InputMediaType.DOCUMENT:
-            self.add_document(**kwargs)
-        else:
-            msg = f"Unknown media type: {type_!r}"
-            raise ValueError(msg)
+        pass
 
     def add_audio(
         self,
@@ -176,19 +165,7 @@ class MediaGroupBuilder:
         :param title: *Optional*. Title of the audio
         :return: None
         """
-        self._add(
-            InputMediaAudio(
-                media=media,
-                thumbnail=thumbnail,
-                caption=caption,
-                parse_mode=parse_mode,
-                caption_entities=caption_entities,
-                duration=duration,
-                performer=performer,
-                title=title,
-                **kwargs,
-            ),
-        )
+        pass
 
     def add_photo(
         self,
@@ -218,16 +195,7 @@ class MediaGroupBuilder:
             with a spoiler animation
         :return: None
         """
-        self._add(
-            InputMediaPhoto(
-                media=media,
-                caption=caption,
-                parse_mode=parse_mode,
-                caption_entities=caption_entities,
-                has_spoiler=has_spoiler,
-                **kwargs,
-            ),
-        )
+        pass
 
     def add_video(
         self,
@@ -275,21 +243,7 @@ class MediaGroupBuilder:
             with a spoiler animation
         :return: None
         """
-        self._add(
-            InputMediaVideo(
-                media=media,
-                thumbnail=thumbnail,
-                caption=caption,
-                parse_mode=parse_mode,
-                caption_entities=caption_entities,
-                width=width,
-                height=height,
-                duration=duration,
-                supports_streaming=supports_streaming,
-                has_spoiler=has_spoiler,
-                **kwargs,
-            ),
-        )
+        pass
 
     def add_document(
         self,
@@ -331,17 +285,7 @@ class MediaGroupBuilder:
         :return: None
 
         """
-        self._add(
-            InputMediaDocument(
-                media=media,
-                thumbnail=thumbnail,
-                caption=caption,
-                parse_mode=parse_mode,
-                caption_entities=caption_entities,
-                disable_content_type_detection=disable_content_type_detection,
-                **kwargs,
-            ),
-        )
+        pass
 
     def build(self) -> list[MediaType]:
         """

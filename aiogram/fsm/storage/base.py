@@ -167,8 +167,7 @@ class BaseStorage(ABC):
         dict_key: str,
         default: Any | None = None,
     ) -> Any | None:
-        data = await self.get_data(storage_key)
-        return data.get(dict_key, default)
+        pass
 
     async def update_data(self, key: StorageKey, data: Mapping[str, Any]) -> dict[str, Any]:
         """

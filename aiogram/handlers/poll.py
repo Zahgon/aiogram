@@ -11,8 +11,8 @@ class PollHandler(BaseHandler[Poll], ABC):
 
     @property
     def question(self) -> str:
-        return self.event.question
+        pass
 
     @property
     def options(self) -> list[PollOption]:
-        return self.event.options
+        pass

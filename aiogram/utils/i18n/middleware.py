@@ -56,14 +56,7 @@ class I18nMiddleware(BaseMiddleware, ABC):
         :param exclude:
         :return:
         """
-        if exclude is None:
-            exclude = set()
-        exclude_events = {"update", *exclude}
-        for event_name, observer in router.observers.items():
-            if event_name in exclude_events:
-                continue
-            observer.outer_middleware(self)
-        return self
+        pass
 
     async def __call__(
         self,
@@ -118,25 +111,7 @@ class SimpleI18nMiddleware(I18nMiddleware):
             raise RuntimeError(msg)
 
     async def get_locale(self, event: TelegramObject, data: dict[str, Any]) -> str:
-        if Locale is None:  # pragma: no cover
-            msg = (
-                f"{type(self).__name__} can be used only when Babel installed\n"
-                "Just install Babel (`pip install Babel`) "
-                "or aiogram with i18n support (`pip install aiogram[i18n]`)"
-            )
-            raise RuntimeError(msg)
-
-        event_from_user: User | None = data.get("event_from_user")
-        if event_from_user is None or event_from_user.language_code is None:
-            return self.i18n.default_locale
-        try:
-            locale = Locale.parse(event_from_user.language_code, sep="-")
-        except UnknownLocaleError:
-            return self.i18n.default_locale
-
-        if locale.language not in self.i18n.available_locales:
-            return self.i18n.default_locale
-        return locale.language
+        pass
 
 
 class ConstI18nMiddleware(I18nMiddleware):
@@ -155,7 +130,7 @@ class ConstI18nMiddleware(I18nMiddleware):
         self.locale = locale
 
     async def get_locale(self, event: TelegramObject, data: dict[str, Any]) -> str:
-        return self.locale
+        pass
 
 
 class FSMI18nMiddleware(SimpleI18nMiddleware):
@@ -174,16 +149,7 @@ class FSMI18nMiddleware(SimpleI18nMiddleware):
         self.key = key
 
     async def get_locale(self, event: TelegramObject, data: dict[str, Any]) -> str:
-        fsm_context: FSMContext | None = data.get("state")
-        locale = None
-        if fsm_context:
-            fsm_data = await fsm_context.get_data()
-            locale = fsm_data.get(self.key, None)
-        if not locale:
-            locale = await super().get_locale(event=event, data=data)
-            if fsm_context:
-                await fsm_context.update_data(data={self.key: locale})
-        return locale
+        pass
 
     async def set_locale(self, state: FSMContext, locale: str) -> None:
         """
@@ -192,5 +158,4 @@ class FSMI18nMiddleware(SimpleI18nMiddleware):
         :param state: instance of FSMContext
         :param locale: new locale
         """
-        await state.update_data(data={self.key: locale})
-        self.i18n.current_locale = locale
+        pass

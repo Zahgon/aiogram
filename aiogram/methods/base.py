@@ -59,9 +59,7 @@ class TelegramMethod(BotContextController, BaseModel, Generic[TelegramType], ABC
         but UNSET might be passing to a model initialization from `Bot.method_name`,
         so we must take care of it and remove it before fields validation.
         """
-        if not isinstance(values, dict):
-            return values
-        return {k: v for k, v in values.items() if not isinstance(v, UNSET_TYPE)}
+        pass
 
     if TYPE_CHECKING:
         __returning__: ClassVar[Any]
@@ -79,7 +77,7 @@ class TelegramMethod(BotContextController, BaseModel, Generic[TelegramType], ABC
             pass
 
     async def emit(self, bot: Bot) -> TelegramType:
-        return await bot(self)
+        pass
 
     def __await__(self) -> Generator[Any, None, TelegramType]:
         bot = self._bot

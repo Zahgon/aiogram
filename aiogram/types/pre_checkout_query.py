@@ -85,14 +85,4 @@ class PreCheckoutQuery(TelegramObject):
         :param error_message: Required if *ok* is :code:`False`. Error message in human readable form that explains the reason for failure to proceed with the checkout (e.g. "Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details. Please choose a different color or garment!"). Telegram will display this message to the user.
         :return: instance of method :class:`aiogram.methods.answer_pre_checkout_query.AnswerPreCheckoutQuery`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import AnswerPreCheckoutQuery
-
-        return AnswerPreCheckoutQuery(
-            pre_checkout_query_id=self.id,
-            ok=ok,
-            error_message=error_message,
-            **kwargs,
-        ).as_(self._bot)
+        pass

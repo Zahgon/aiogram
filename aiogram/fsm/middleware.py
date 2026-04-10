@@ -49,15 +49,7 @@ class FSMContextMiddleware(BaseMiddleware):
         data: dict[str, Any],
         destiny: str = DEFAULT_DESTINY,
     ) -> FSMContext | None:
-        event_context: EventContext = cast(EventContext, data.get(EVENT_CONTEXT_KEY))
-        return self.resolve_context(
-            bot=bot,
-            chat_id=event_context.chat_id,
-            user_id=event_context.user_id,
-            thread_id=event_context.thread_id,
-            business_connection_id=event_context.business_connection_id,
-            destiny=destiny,
-        )
+        pass
 
     def resolve_context(
         self,
@@ -68,28 +60,7 @@ class FSMContextMiddleware(BaseMiddleware):
         business_connection_id: str | None = None,
         destiny: str = DEFAULT_DESTINY,
     ) -> FSMContext | None:
-        if chat_id is None:
-            chat_id = user_id
-        elif user_id is None and self.strategy in {FSMStrategy.CHAT, FSMStrategy.CHAT_TOPIC}:
-            # CHAT/CHAT_TOPIC are chat-scoped, so missing user_id can fallback to chat_id.
-            user_id = chat_id
-
-        if chat_id is not None and user_id is not None:
-            chat_id, user_id, thread_id = apply_strategy(
-                chat_id=chat_id,
-                user_id=user_id,
-                thread_id=thread_id,
-                strategy=self.strategy,
-            )
-            return self.get_context(
-                bot=bot,
-                chat_id=chat_id,
-                user_id=user_id,
-                thread_id=thread_id,
-                business_connection_id=business_connection_id,
-                destiny=destiny,
-            )
-        return None
+        pass
 
     def get_context(
         self,
@@ -100,18 +71,7 @@ class FSMContextMiddleware(BaseMiddleware):
         business_connection_id: str | None = None,
         destiny: str = DEFAULT_DESTINY,
     ) -> FSMContext:
-        return FSMContext(
-            storage=self.storage,
-            key=StorageKey(
-                user_id=user_id,
-                chat_id=chat_id,
-                bot_id=bot.id,
-                thread_id=thread_id,
-                business_connection_id=business_connection_id,
-                destiny=destiny,
-            ),
-        )
+        pass
 
     async def close(self) -> None:
-        await self.storage.close()
-        await self.events_isolation.close()
+        pass

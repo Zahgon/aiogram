@@ -28,39 +28,12 @@ def setup_application(app: Application, dispatcher: Dispatcher, /, **kwargs: Any
     :param kwargs: additional data
     :return:
     """
-    workflow_data = {
-        "app": app,
-        "dispatcher": dispatcher,
-        **dispatcher.workflow_data,
-        **kwargs,
-    }
-
-    async def on_startup(*a: Any, **kw: Any) -> None:  # pragma: no cover
-        await dispatcher.emit_startup(**workflow_data)
-
-    async def on_shutdown(*a: Any, **kw: Any) -> None:  # pragma: no cover
-        await dispatcher.emit_shutdown(**workflow_data)
-
-    app.on_startup.append(on_startup)
-    app.on_shutdown.append(on_shutdown)
+    pass
 
 
 def check_ip(ip_filter: IPFilter, request: web.Request) -> tuple[str, bool]:
     # Try to resolve client IP over reverse proxy
-    if forwarded_for := request.headers.get("X-Forwarded-For", ""):
-        # Get the left-most ip when there is multiple ips
-        # (request got through multiple proxy/load balancers)
-        # https://github.com/aiogram/aiogram/issues/672
-        forwarded_for, *_ = forwarded_for.split(",", maxsplit=1)
-        return forwarded_for, forwarded_for in ip_filter
-
-    # When reverse proxy is not configured IP address can be resolved from incoming connection
-    if peer_name := cast(Transport, request.transport).get_extra_info("peername"):
-        host, _ = peer_name
-        return host, host in ip_filter
-
-    # Potentially impossible case
-    return "", False  # pragma: no cover
+    pass
 
 
 def ip_filter_middleware(
@@ -71,16 +44,7 @@ def ip_filter_middleware(
     :param ip_filter:
     :return:
     """
-
-    @middleware
-    async def _ip_filter_middleware(request: web.Request, handler: Handler) -> Any:
-        ip_address, accept = check_ip(ip_filter=ip_filter, request=request)
-        if not accept:
-            loggers.webhook.warning("Blocking request from an unauthorized IP: %s", ip_address)
-            raise web.HTTPUnauthorized()
-        return await handler(request)
-
-    return _ip_filter_middleware
+    pass
 
 
 class BaseRequestHandler(ABC):
@@ -111,11 +75,10 @@ class BaseRequestHandler(ABC):
         :param path: route path
         :param kwargs:
         """
-        app.on_shutdown.append(self._handle_close)
-        app.router.add_route("POST", path, self.handle, **kwargs)
+        pass
 
     async def _handle_close(self, *a: Any, **kw: Any) -> None:
-        await self.close()
+        pass
 
     @abstractmethod
     async def close(self) -> None:
@@ -137,73 +100,23 @@ class BaseRequestHandler(ABC):
         pass
 
     async def _background_feed_update(self, bot: Bot, update: dict[str, Any]) -> None:
-        result = await self.dispatcher.feed_raw_update(bot=bot, update=update, **self.data)
-        if isinstance(result, TelegramMethod):
-            await self.dispatcher.silent_call_request(bot=bot, result=result)
+        pass
 
     async def _handle_request_background(self, bot: Bot, request: web.Request) -> web.Response:
-        feed_update_task = asyncio.create_task(
-            self._background_feed_update(
-                bot=bot,
-                update=await request.json(loads=bot.session.json_loads),
-            ),
-        )
-        self._background_feed_update_tasks.add(feed_update_task)
-        feed_update_task.add_done_callback(self._background_feed_update_tasks.discard)
-        return web.json_response({}, dumps=bot.session.json_dumps)
+        pass
 
     def _build_response_writer(
         self,
         bot: Bot,
         result: TelegramMethod[TelegramType] | None,
     ) -> Payload:
-        if not result:
-            # we need to return something "empty"
-            # and "empty" form doesn't work
-            # since it's sending only "end" boundary w/o "start"
-            return JsonPayload({})
-
-        writer = MultipartWriter(
-            "form-data",
-            boundary=f"webhookBoundary{secrets.token_urlsafe(16)}",
-        )
-
-        payload = writer.append(result.__api_method__)
-        payload.set_content_disposition("form-data", name="method")
-
-        files: dict[str, InputFile] = {}
-        for key, value in result.model_dump(warnings=False).items():
-            value = bot.session.prepare_value(value, bot=bot, files=files)
-            if not value:
-                continue
-            payload = writer.append(value)
-            payload.set_content_disposition("form-data", name=key)
-
-        for key, value in files.items():
-            payload = writer.append(value.read(bot))
-            payload.set_content_disposition(
-                "form-data",
-                name=key,
-                filename=value.filename or key,
-            )
-
-        return writer
+        pass
 
     async def _handle_request(self, bot: Bot, request: web.Request) -> web.Response:
-        result: TelegramMethod[Any] | None = await self.dispatcher.feed_webhook_update(
-            bot,
-            await request.json(loads=bot.session.json_loads),
-            **self.data,
-        )
-        return web.Response(body=self._build_response_writer(bot=bot, result=result))
+        pass
 
     async def handle(self, request: web.Request) -> web.Response:
-        bot = await self.resolve_bot(request)
-        if not self.verify_secret(request.headers.get("X-Telegram-Bot-Api-Secret-Token", ""), bot):
-            return web.Response(body="Unauthorized", status=401)
-        if self.handle_in_background:
-            return await self._handle_request_background(bot=bot, request=request)
-        return await self._handle_request(bot=bot, request=request)
+        pass
 
     __call__ = handle
 
@@ -230,18 +143,16 @@ class SimpleRequestHandler(BaseRequestHandler):
         self.secret_token = secret_token
 
     def verify_secret(self, telegram_secret_token: str, bot: Bot) -> bool:
-        if self.secret_token:
-            return secrets.compare_digest(telegram_secret_token, self.secret_token)
-        return True
+        pass
 
     async def close(self) -> None:
         """
         Close bot session
         """
-        await self.bot.session.close()
+        pass
 
     async def resolve_bot(self, request: web.Request) -> Bot:
-        return self.bot
+        pass
 
 
 class TokenBasedRequestHandler(BaseRequestHandler):
@@ -273,11 +184,10 @@ class TokenBasedRequestHandler(BaseRequestHandler):
         self.bots: dict[str, Bot] = {}
 
     def verify_secret(self, telegram_secret_token: str, bot: Bot) -> bool:
-        return True
+        pass
 
     async def close(self) -> None:
-        for bot in self.bots.values():
-            await bot.session.close()
+        pass
 
     def register(self, app: Application, /, path: str, **kwargs: Any) -> None:
         """
@@ -287,10 +197,7 @@ class TokenBasedRequestHandler(BaseRequestHandler):
         :param path: route path
         :param kwargs:
         """
-        if "{bot_token}" not in path:
-            msg = "Path should contains '{bot_token}' substring"
-            raise ValueError(msg)
-        super().register(app, path=path, **kwargs)
+        pass
 
     async def resolve_bot(self, request: web.Request) -> Bot:
         """
@@ -299,7 +206,4 @@ class TokenBasedRequestHandler(BaseRequestHandler):
         :param request:
         :return:
         """
-        token = request.match_info["bot_token"]
-        if token not in self.bots:
-            self.bots[token] = Bot(token=token, **self.bot_settings)
-        return self.bots[token]
+        pass

@@ -103,8 +103,7 @@ class Command(Filter):
         )
 
     def update_handler_flags(self, flags: dict[str, Any]) -> None:
-        commands = flags.setdefault("commands", [])
-        commands.append(self)
+        pass
 
     async def __call__(self, message: Message, bot: Bot) -> bool | dict[str, Any]:
         if not isinstance(message, Message):
@@ -127,51 +126,16 @@ class Command(Filter):
     def extract_command(cls, text: str) -> CommandObject:
         # First step: separate command with arguments
         # "/command@mention arg1 arg2" -> "/command@mention", ["arg1 arg2"]
-        try:
-            full_command, *args = text.split(maxsplit=1)
-        except ValueError as e:
-            msg = "not enough values to unpack"
-            raise CommandException(msg) from e
-
-        # Separate command into valuable parts
-        # "/command@mention" -> "/", ("command", "@", "mention")
-        prefix, (command, _, mention) = full_command[0], full_command[1:].partition("@")
-        return CommandObject(
-            prefix=prefix,
-            command=command,
-            mention=mention or None,
-            args=args[0] if args else None,
-        )
+        pass
 
     def validate_prefix(self, command: CommandObject) -> None:
-        if command.prefix not in self.prefix:
-            msg = "Invalid command prefix"
-            raise CommandException(msg)
+        pass
 
     async def validate_mention(self, bot: Bot, command: CommandObject) -> None:
-        if command.mention and not self.ignore_mention:
-            me = await bot.me()
-            if me.username and command.mention.lower() != me.username.lower():
-                msg = "Mention did not match"
-                raise CommandException(msg)
+        pass
 
     def validate_command(self, command: CommandObject) -> CommandObject:
-        for allowed_command in cast(Sequence[CommandPatternType], self.commands):
-            # Command can be presented as regexp pattern or raw string
-            # then need to validate that in different ways
-            if isinstance(allowed_command, Pattern):  # Regexp
-                result = allowed_command.match(command.command)
-                if result:
-                    return replace(command, regexp_match=result)
-
-            command_name = command.command
-            if self.ignore_case:
-                command_name = command_name.casefold()
-
-            if command_name == allowed_command:  # String
-                return command
-        msg = "Command did not match pattern"
-        raise CommandException(msg)
+        pass
 
     async def parse_command(self, text: str, bot: Bot) -> CommandObject:
         """
@@ -181,21 +145,10 @@ class Command(Filter):
         :param bot:
         :return:
         """
-        command = self.extract_command(text)
-        self.validate_prefix(command=command)
-        await self.validate_mention(bot=bot, command=command)
-        command = self.validate_command(command)
-        command = self.do_magic(command=command)
-        return command  # noqa: RET504
+        pass
 
     def do_magic(self, command: CommandObject) -> Any:
-        if self.magic is None:
-            return command
-        result = self.magic.resolve(command)
-        if not result:
-            msg = "Rejected via magic filter"
-            raise CommandException(msg)
-        return replace(command, magic_result=result)
+        pass
 
 
 @dataclass(frozen=True)
@@ -222,19 +175,14 @@ class CommandObject:
         """
         This command has mention?
         """
-        return bool(self.mention)
+        pass
 
     @property
     def text(self) -> str:
         """
         Generate original text from object
         """
-        line = self.prefix + self.command
-        if self.mention:
-            line += "@" + self.mention
-        if self.args:
-            line += " " + self.args
-        return line
+        pass
 
 
 class CommandStart(Command):
@@ -273,31 +221,7 @@ class CommandStart(Command):
         :param bot:
         :return:
         """
-        command = self.extract_command(text)
-        self.validate_prefix(command=command)
-        await self.validate_mention(bot=bot, command=command)
-        command = self.validate_command(command)
-        command = self.validate_deeplink(command=command)
-        command = self.do_magic(command=command)
-        return command  # noqa: RET504
+        pass
 
     def validate_deeplink(self, command: CommandObject) -> CommandObject:
-        if self.deep_link is None:
-            return command
-        if self.deep_link is False:
-            if command.args:
-                msg = "Deep-link was not expected"
-                raise CommandException(msg)
-            return command
-        if not command.args:
-            msg = "Deep-link was missing"
-            raise CommandException(msg)
-        args = command.args
-        if self.deep_link_encoded:
-            try:
-                args = decode_payload(args)
-            except UnicodeDecodeError as e:
-                msg = f"Failed to decode Base64: {e}"
-                raise CommandException(msg) from e
-            return replace(command, args=args)
-        return command
+        pass

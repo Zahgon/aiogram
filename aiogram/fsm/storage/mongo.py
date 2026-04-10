@@ -60,14 +60,11 @@ class MongoStorage(BaseStorage):
         :param kwargs: arguments to be passed to :class:`MongoStorage`
         :return: an instance of :class:`MongoStorage`
         """
-        if connection_kwargs is None:
-            connection_kwargs = {}
-        client = AsyncIOMotorClient(url, **connection_kwargs)
-        return cls(client=client, **kwargs)
+        pass
 
     async def close(self) -> None:
         """Cleanup client resources and disconnect from MongoDB."""
-        self._client.close()
+        pass
 
     def resolve_state(self, value: StateType) -> str | None:
         if value is None:

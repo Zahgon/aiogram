@@ -61,66 +61,19 @@ class ChatActionSender:
 
     @property
     def running(self) -> bool:
-        return bool(self._task)
+        pass
 
     async def _wait(self, interval: float) -> None:
-        with suppress(asyncio.TimeoutError):
-            await asyncio.wait_for(self._close_event.wait(), interval)
+        pass
 
     async def _worker(self) -> None:
-        logger.debug(
-            "Started chat action %r sender in chat_id=%s via bot id=%d",
-            self.action,
-            self.chat_id,
-            self.bot.id,
-        )
-        try:
-            counter = 0
-            await self._wait(self.initial_sleep)
-            while not self._close_event.is_set():
-                start = time.monotonic()
-                logger.debug(
-                    "Sent chat action %r to chat_id=%s via bot %d (already sent actions %d)",
-                    self.action,
-                    self.chat_id,
-                    self.bot.id,
-                    counter,
-                )
-                await self.bot.send_chat_action(
-                    chat_id=self.chat_id,
-                    action=self.action,
-                    message_thread_id=self.message_thread_id,
-                )
-                counter += 1
-
-                interval = self.interval - (time.monotonic() - start)
-                await self._wait(interval)
-        finally:
-            logger.debug(
-                "Finished chat action %r sender in chat_id=%s via bot id=%d",
-                self.action,
-                self.chat_id,
-                self.bot.id,
-            )
-            self._closed_event.set()
+        pass
 
     async def _run(self) -> None:
-        async with self._lock:
-            self._close_event.clear()
-            self._closed_event.clear()
-            if self.running:
-                msg = "Already running"
-                raise RuntimeError(msg)
-            self._task = asyncio.create_task(self._worker())
+        pass
 
     async def _stop(self) -> None:
-        async with self._lock:
-            if not self.running:
-                return
-            if not self._close_event.is_set():  # pragma: no branches
-                self._close_event.set()
-                await self._closed_event.wait()
-            self._task = None
+        pass
 
     async def __aenter__(self) -> "ChatActionSender":
         await self._run()
@@ -144,14 +97,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `typing` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="typing",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def upload_photo(
@@ -163,14 +109,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `upload_photo` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="upload_photo",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def record_video(
@@ -182,14 +121,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `record_video` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="record_video",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def upload_video(
@@ -201,14 +133,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `upload_video` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="upload_video",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def record_voice(
@@ -220,14 +145,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `record_voice` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="record_voice",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def upload_voice(
@@ -239,14 +157,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `upload_voice` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="upload_voice",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def upload_document(
@@ -258,14 +169,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `upload_document` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="upload_document",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def choose_sticker(
@@ -277,14 +181,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `choose_sticker` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="choose_sticker",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def find_location(
@@ -296,14 +193,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `find_location` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="find_location",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def record_video_note(
@@ -315,14 +205,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `record_video_note` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="record_video_note",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
     @classmethod
     def upload_video_note(
@@ -334,14 +217,7 @@ class ChatActionSender:
         initial_sleep: float = DEFAULT_INITIAL_SLEEP,
     ) -> "ChatActionSender":
         """Create instance of the sender with `upload_video_note` action"""
-        return cls(
-            bot=bot,
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            action="upload_video_note",
-            interval=interval,
-            initial_sleep=initial_sleep,
-        )
+        pass
 
 
 class ChatActionMiddleware(BaseMiddleware):

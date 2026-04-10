@@ -65,21 +65,7 @@ class CallbackData(BaseModel):
         super().__init_subclass__(**kwargs)
 
     def _encode_value(self, key: str, value: Any) -> str:
-        if value is None:
-            return ""
-        if isinstance(value, Enum):
-            return str(value.value)
-        if isinstance(value, UUID):
-            return value.hex
-        if isinstance(value, bool):
-            return str(int(value))
-        if isinstance(value, (int, str, float, Decimal, Fraction)):
-            return str(value)
-        msg = (
-            f"Attribute {key}={value!r} of type {type(value).__name__!r}"
-            f" can not be packed to callback data"
-        )
-        raise ValueError(msg)
+        pass
 
     def pack(self) -> str:
         """
@@ -87,24 +73,7 @@ class CallbackData(BaseModel):
 
         :return: valid callback data for Telegram Bot API
         """
-        result = [self.__prefix__]
-        for key, value in self.model_dump(mode="python").items():
-            encoded = self._encode_value(key, value)
-            if self.__separator__ in encoded:
-                msg = (
-                    f"Separator symbol {self.__separator__!r} can not be used "
-                    f"in value {key}={encoded!r}"
-                )
-                raise ValueError(msg)
-            result.append(encoded)
-        callback_data = self.__separator__.join(result)
-        if len(callback_data.encode()) > MAX_CALLBACK_LENGTH:
-            msg = (
-                f"Resulted callback data is too long! "
-                f"len({callback_data!r}.encode()) > {MAX_CALLBACK_LENGTH}"
-            )
-            raise ValueError(msg)
-        return callback_data
+        pass
 
     @classmethod
     def unpack(cls, value: str) -> Self:
@@ -114,28 +83,7 @@ class CallbackData(BaseModel):
         :param value: value from Telegram
         :return: instance of CallbackData
         """
-        prefix, *parts = value.split(cls.__separator__)
-        names = cls.model_fields.keys()
-        if len(parts) != len(names):
-            msg = (
-                f"Callback data {cls.__name__!r} takes {len(names)} arguments "
-                f"but {len(parts)} were given"
-            )
-            raise TypeError(msg)
-        if prefix != cls.__prefix__:
-            msg = f"Bad prefix ({prefix!r} != {cls.__prefix__!r})"
-            raise ValueError(msg)
-        payload = {}
-        for k, v in zip(names, parts, strict=True):  # type: str, str
-            if (
-                (field := cls.model_fields.get(k))
-                and v == ""
-                and _check_field_is_nullable(field)
-                and field.default != ""
-            ):
-                v = field.default if field.default is not PydanticUndefined else None
-            payload[k] = v
-        return cls(**payload)
+        pass
 
     @classmethod
     def filter(cls, rule: MagicFilter | None = None) -> CallbackQueryFilter:
@@ -145,7 +93,7 @@ class CallbackData(BaseModel):
         :param rule: magic rule
         :return: instance of filter
         """
-        return CallbackQueryFilter(callback_data=cls, rule=rule)
+        pass
 
 
 class CallbackQueryFilter(Filter):
@@ -201,9 +149,4 @@ def _check_field_is_nullable(field: FieldInfo) -> bool:
     :return: True if the field is nullable, False otherwise.
 
     """
-    if not field.is_required():
-        return True
-
-    return typing.get_origin(field.annotation) in _UNION_TYPES and type(None) in typing.get_args(
-        field.annotation,
-    )
+    pass

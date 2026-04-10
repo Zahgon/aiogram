@@ -95,19 +95,4 @@ class InlineQuery(TelegramObject):
         :param switch_pm_text: If passed, clients will display a button with specified text that switches the user to a private chat with the bot and sends the bot a start message with the parameter *switch_pm_parameter*
         :return: instance of method :class:`aiogram.methods.answer_inline_query.AnswerInlineQuery`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import AnswerInlineQuery
-
-        return AnswerInlineQuery(
-            inline_query_id=self.id,
-            results=results,
-            cache_time=cache_time,
-            is_personal=is_personal,
-            next_offset=next_offset,
-            button=button,
-            switch_pm_parameter=switch_pm_parameter,
-            switch_pm_text=switch_pm_text,
-            **kwargs,
-        ).as_(self._bot)
+        pass

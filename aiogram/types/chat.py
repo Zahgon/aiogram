@@ -380,9 +380,7 @@ class Chat(TelegramObject):
         -1 * 10 ^ (number_length + 2)
         Finally, self.id is substracted from that number
         """
-        short_id = str(self.id).replace("-100", "")
-        shift = int(-1 * pow(10, len(short_id) + 2))
-        return shift - self.id
+        pass
 
     @property
     def full_name(self) -> str:
@@ -391,13 +389,7 @@ class Chat(TelegramObject):
         For private chat it is first_name + last_name.
         For other chat types it is title.
         """
-        if self.title is not None:
-            return self.title
-
-        if self.last_name is not None:
-            return f"{self.first_name} {self.last_name}"
-
-        return f"{self.first_name}"
+        pass
 
     def ban_sender_chat(
         self,
@@ -417,16 +409,7 @@ class Chat(TelegramObject):
         :param sender_chat_id: Unique identifier of the target sender chat
         :return: instance of method :class:`aiogram.methods.ban_chat_sender_chat.BanChatSenderChat`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import BanChatSenderChat
-
-        return BanChatSenderChat(
-            chat_id=self.id,
-            sender_chat_id=sender_chat_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def unban_sender_chat(
         self,
@@ -446,16 +429,7 @@ class Chat(TelegramObject):
         :param sender_chat_id: Unique identifier of the target sender chat
         :return: instance of method :class:`aiogram.methods.unban_chat_sender_chat.UnbanChatSenderChat`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import UnbanChatSenderChat
-
-        return UnbanChatSenderChat(
-            chat_id=self.id,
-            sender_chat_id=sender_chat_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def get_administrators(
         self,
@@ -473,15 +447,7 @@ class Chat(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.get_chat_administrators.GetChatAdministrators`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import GetChatAdministrators
-
-        return GetChatAdministrators(
-            chat_id=self.id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def delete_message(
         self,
@@ -521,16 +487,7 @@ class Chat(TelegramObject):
         :param message_id: Identifier of the message to delete
         :return: instance of method :class:`aiogram.methods.delete_message.DeleteMessage`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import DeleteMessage
-
-        return DeleteMessage(
-            chat_id=self.id,
-            message_id=message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def revoke_invite_link(
         self,
@@ -550,16 +507,7 @@ class Chat(TelegramObject):
         :param invite_link: The invite link to revoke
         :return: instance of method :class:`aiogram.methods.revoke_chat_invite_link.RevokeChatInviteLink`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import RevokeChatInviteLink
-
-        return RevokeChatInviteLink(
-            chat_id=self.id,
-            invite_link=invite_link,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def edit_invite_link(
         self,
@@ -587,20 +535,7 @@ class Chat(TelegramObject):
         :param creates_join_request: :code:`True`, if users joining the chat via the link need to be approved by chat administrators. If :code:`True`, *member_limit* can't be specified
         :return: instance of method :class:`aiogram.methods.edit_chat_invite_link.EditChatInviteLink`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import EditChatInviteLink
-
-        return EditChatInviteLink(
-            chat_id=self.id,
-            invite_link=invite_link,
-            name=name,
-            expire_date=expire_date,
-            member_limit=member_limit,
-            creates_join_request=creates_join_request,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def create_invite_link(
         self,
@@ -626,19 +561,7 @@ class Chat(TelegramObject):
         :param creates_join_request: :code:`True`, if users joining the chat via the link need to be approved by chat administrators. If :code:`True`, *member_limit* can't be specified
         :return: instance of method :class:`aiogram.methods.create_chat_invite_link.CreateChatInviteLink`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import CreateChatInviteLink
-
-        return CreateChatInviteLink(
-            chat_id=self.id,
-            name=name,
-            expire_date=expire_date,
-            member_limit=member_limit,
-            creates_join_request=creates_join_request,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def export_invite_link(
         self,
@@ -658,15 +581,7 @@ class Chat(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.export_chat_invite_link.ExportChatInviteLink`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import ExportChatInviteLink
-
-        return ExportChatInviteLink(
-            chat_id=self.id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def do(
         self,
@@ -694,18 +609,7 @@ class Chat(TelegramObject):
         :param message_thread_id: Unique identifier for the target message thread or topic of a forum; for supergroups and private chats of bots with forum topic mode enabled only
         :return: instance of method :class:`aiogram.methods.send_chat_action.SendChatAction`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendChatAction
-
-        return SendChatAction(
-            chat_id=self.id,
-            action=action,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def delete_sticker_set(
         self,
@@ -723,15 +627,7 @@ class Chat(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.delete_chat_sticker_set.DeleteChatStickerSet`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import DeleteChatStickerSet
-
-        return DeleteChatStickerSet(
-            chat_id=self.id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def set_sticker_set(
         self,
@@ -751,16 +647,7 @@ class Chat(TelegramObject):
         :param sticker_set_name: Name of the sticker set to be set as the group sticker set
         :return: instance of method :class:`aiogram.methods.set_chat_sticker_set.SetChatStickerSet`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SetChatStickerSet
-
-        return SetChatStickerSet(
-            chat_id=self.id,
-            sticker_set_name=sticker_set_name,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def get_member(
         self,
@@ -780,16 +667,7 @@ class Chat(TelegramObject):
         :param user_id: Unique identifier of the target user
         :return: instance of method :class:`aiogram.methods.get_chat_member.GetChatMember`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import GetChatMember
-
-        return GetChatMember(
-            chat_id=self.id,
-            user_id=user_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def get_member_count(
         self,
@@ -807,15 +685,7 @@ class Chat(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.get_chat_member_count.GetChatMemberCount`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import GetChatMemberCount
-
-        return GetChatMemberCount(
-            chat_id=self.id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def leave(
         self,
@@ -859,15 +729,7 @@ class Chat(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.unpin_all_chat_messages.UnpinAllChatMessages`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import UnpinAllChatMessages
-
-        return UnpinAllChatMessages(
-            chat_id=self.id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def unpin_message(
         self,
@@ -889,17 +751,7 @@ class Chat(TelegramObject):
         :param message_id: Identifier of the message to unpin. Required if *business_connection_id* is specified. If not specified, the most recent pinned message (by sending date) will be unpinned.
         :return: instance of method :class:`aiogram.methods.unpin_chat_message.UnpinChatMessage`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import UnpinChatMessage
-
-        return UnpinChatMessage(
-            chat_id=self.id,
-            business_connection_id=business_connection_id,
-            message_id=message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def pin_message(
         self,
@@ -923,18 +775,7 @@ class Chat(TelegramObject):
         :param disable_notification: Pass :code:`True` if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
         :return: instance of method :class:`aiogram.methods.pin_chat_message.PinChatMessage`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import PinChatMessage
-
-        return PinChatMessage(
-            chat_id=self.id,
-            message_id=message_id,
-            business_connection_id=business_connection_id,
-            disable_notification=disable_notification,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def set_administrator_custom_title(
         self,
@@ -956,17 +797,7 @@ class Chat(TelegramObject):
         :param custom_title: New custom title for the administrator; 0-16 characters, emoji are not allowed
         :return: instance of method :class:`aiogram.methods.set_chat_administrator_custom_title.SetChatAdministratorCustomTitle`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SetChatAdministratorCustomTitle
-
-        return SetChatAdministratorCustomTitle(
-            chat_id=self.id,
-            user_id=user_id,
-            custom_title=custom_title,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def set_member_tag(
         self,
@@ -988,17 +819,7 @@ class Chat(TelegramObject):
         :param tag: New tag for the member; 0-16 characters, emoji are not allowed
         :return: instance of method :class:`aiogram.methods.set_chat_member_tag.SetChatMemberTag`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SetChatMemberTag
-
-        return SetChatMemberTag(
-            chat_id=self.id,
-            user_id=user_id,
-            tag=tag,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def set_permissions(
         self,
@@ -1020,17 +841,7 @@ class Chat(TelegramObject):
         :param use_independent_chat_permissions: Pass :code:`True` if chat permissions are set independently. Otherwise, the *can_send_other_messages* and *can_add_web_page_previews* permissions will imply the *can_send_messages*, *can_send_audios*, *can_send_documents*, *can_send_photos*, *can_send_videos*, *can_send_video_notes*, and *can_send_voice_notes* permissions; the *can_send_polls* permission will imply the *can_send_messages* permission.
         :return: instance of method :class:`aiogram.methods.set_chat_permissions.SetChatPermissions`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SetChatPermissions
-
-        return SetChatPermissions(
-            chat_id=self.id,
-            permissions=permissions,
-            use_independent_chat_permissions=use_independent_chat_permissions,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def promote(
         self,
@@ -1084,33 +895,7 @@ class Chat(TelegramObject):
         :param can_manage_tags: Pass :code:`True` if the administrator can edit the tags of regular members; for groups and supergroups only
         :return: instance of method :class:`aiogram.methods.promote_chat_member.PromoteChatMember`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import PromoteChatMember
-
-        return PromoteChatMember(
-            chat_id=self.id,
-            user_id=user_id,
-            is_anonymous=is_anonymous,
-            can_manage_chat=can_manage_chat,
-            can_delete_messages=can_delete_messages,
-            can_manage_video_chats=can_manage_video_chats,
-            can_restrict_members=can_restrict_members,
-            can_promote_members=can_promote_members,
-            can_change_info=can_change_info,
-            can_invite_users=can_invite_users,
-            can_post_stories=can_post_stories,
-            can_edit_stories=can_edit_stories,
-            can_delete_stories=can_delete_stories,
-            can_post_messages=can_post_messages,
-            can_edit_messages=can_edit_messages,
-            can_pin_messages=can_pin_messages,
-            can_manage_topics=can_manage_topics,
-            can_manage_direct_messages=can_manage_direct_messages,
-            can_manage_tags=can_manage_tags,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def restrict(
         self,
@@ -1136,19 +921,7 @@ class Chat(TelegramObject):
         :param until_date: Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever
         :return: instance of method :class:`aiogram.methods.restrict_chat_member.RestrictChatMember`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import RestrictChatMember
-
-        return RestrictChatMember(
-            chat_id=self.id,
-            user_id=user_id,
-            permissions=permissions,
-            use_independent_chat_permissions=use_independent_chat_permissions,
-            until_date=until_date,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def unban(
         self,
@@ -1170,17 +943,7 @@ class Chat(TelegramObject):
         :param only_if_banned: Do nothing if the user is not banned
         :return: instance of method :class:`aiogram.methods.unban_chat_member.UnbanChatMember`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import UnbanChatMember
-
-        return UnbanChatMember(
-            chat_id=self.id,
-            user_id=user_id,
-            only_if_banned=only_if_banned,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def ban(
         self,
@@ -1204,18 +967,7 @@ class Chat(TelegramObject):
         :param revoke_messages: Pass :code:`True` to delete all messages from the chat for the user that is being removed. If :code:`False`, the user will be able to see messages in the group that were sent before the user was removed. Always :code:`True` for supergroups and channels.
         :return: instance of method :class:`aiogram.methods.ban_chat_member.BanChatMember`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import BanChatMember
-
-        return BanChatMember(
-            chat_id=self.id,
-            user_id=user_id,
-            until_date=until_date,
-            revoke_messages=revoke_messages,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def set_description(
         self,
@@ -1235,16 +987,7 @@ class Chat(TelegramObject):
         :param description: New chat description, 0-255 characters
         :return: instance of method :class:`aiogram.methods.set_chat_description.SetChatDescription`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SetChatDescription
-
-        return SetChatDescription(
-            chat_id=self.id,
-            description=description,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def set_title(
         self,
@@ -1264,16 +1007,7 @@ class Chat(TelegramObject):
         :param title: New chat title, 1-128 characters
         :return: instance of method :class:`aiogram.methods.set_chat_title.SetChatTitle`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SetChatTitle
-
-        return SetChatTitle(
-            chat_id=self.id,
-            title=title,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def delete_photo(
         self,
@@ -1291,15 +1025,7 @@ class Chat(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.delete_chat_photo.DeleteChatPhoto`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import DeleteChatPhoto
-
-        return DeleteChatPhoto(
-            chat_id=self.id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def set_photo(
         self,
@@ -1319,16 +1045,7 @@ class Chat(TelegramObject):
         :param photo: New chat photo, uploaded using multipart/form-data
         :return: instance of method :class:`aiogram.methods.set_chat_photo.SetChatPhoto`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SetChatPhoto
-
-        return SetChatPhoto(
-            chat_id=self.id,
-            photo=photo,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def unpin_all_general_forum_topic_messages(
         self,
@@ -1346,12 +1063,4 @@ class Chat(TelegramObject):
 
         :return: instance of method :class:`aiogram.methods.unpin_all_general_forum_topic_messages.UnpinAllGeneralForumTopicMessages`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import UnpinAllGeneralForumTopicMessages
-
-        return UnpinAllGeneralForumTopicMessages(
-            chat_id=self.id,
-            **kwargs,
-        ).as_(self._bot)
+        pass

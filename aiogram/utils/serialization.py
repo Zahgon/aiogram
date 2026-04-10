@@ -10,9 +10,7 @@ from aiogram.types import InputFile
 
 
 def _get_fake_bot(default: DefaultBotProperties | None = None) -> Bot:
-    if default is None:
-        default = DefaultBotProperties()
-    return Bot(token="42:Fake", default=default)
+    pass
 
 
 @dataclass
@@ -45,27 +43,7 @@ def deserialize_telegram_object(
     :param include_api_method_name: Whether to include the API method name in the result.
     :return: The deserialized Telegram object.
     """
-    extends = {}
-    if include_api_method_name and isinstance(obj, TelegramMethod):
-        extends["method"] = obj.__api_method__
-
-    if isinstance(obj, BaseModel):
-        obj = obj.model_dump(mode="python", warnings=False)
-
-    # Fake bot is needed to exclude global defaults from the object.
-    fake_bot = _get_fake_bot(default=default)
-
-    files: dict[str, InputFile] = {}
-    prepared = fake_bot.session.prepare_value(
-        obj,
-        bot=fake_bot,
-        files=files,
-        _dumps_json=False,
-    )
-
-    if isinstance(prepared, dict):
-        prepared.update(extends)
-    return DeserializedTelegramObject(data=prepared, files=files)
+    pass
 
 
 def deserialize_telegram_object_to_python(
@@ -82,8 +60,4 @@ def deserialize_telegram_object_to_python(
     :param include_api_method_name: Whether to include the API method name in the result.
     :return: The deserialized telegram object.
     """
-    return deserialize_telegram_object(
-        obj,
-        default=default,
-        include_api_method_name=include_api_method_name,
-    ).data
+    pass

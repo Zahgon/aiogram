@@ -17,30 +17,14 @@ class State:
 
     @property
     def group(self) -> "type[StatesGroup]":
-        if not self._group:
-            msg = "This state is not in any group."
-            raise RuntimeError(msg)
-        return self._group
+        pass
 
     @property
     def state(self) -> str | None:
-        if self._state is None or self._state == "*":
-            return self._state
-
-        if self._group_name is None and self._group:
-            group = self._group.__full_group_name__
-        elif self._group_name:
-            group = self._group_name
-        else:
-            group = "@"
-
-        return f"{group}:{self._state}"
+        pass
 
     def set_parent(self, group: "type[StatesGroup]") -> None:
-        if not issubclass(group, StatesGroup):
-            msg = "Group must be subclass of StatesGroup"
-            raise ValueError(msg)
-        self._group = group
+        pass
 
     def __set_name__(self, owner: "type[StatesGroup]", name: str) -> None:
         if self._state is None:
@@ -122,24 +106,16 @@ class StatesGroupMeta(type):
         `__all_states_names__` is already recorded without taking into
         account the name of current parent.
         """
-        child.__parent__ = cls  # type: ignore[assignment]
-        child.__all_states_names__ = child._get_all_states_names()
-        return child
+        pass
 
     def _get_all_childs(cls) -> tuple[type["StatesGroup"], ...]:
-        result = cls.__childs__
-        for child in cls.__childs__:
-            result += child.__childs__
-        return result
+        pass
 
     def _get_all_states(cls) -> tuple[State, ...]:
-        result = cls.__states__
-        for group in cls.__childs__:
-            result += group.__all_states__
-        return result
+        pass
 
     def _get_all_states_names(cls) -> tuple[str, ...]:
-        return tuple(state.state for state in cls.__all_states__ if state.state)
+        pass
 
     def __contains__(cls, item: Any) -> bool:
         if isinstance(item, str):
@@ -160,9 +136,7 @@ class StatesGroupMeta(type):
 class StatesGroup(metaclass=StatesGroupMeta):
     @classmethod
     def get_root(cls) -> type["StatesGroup"]:
-        if cls.__parent__ is None:
-            return cls
-        return cls.__parent__.get_root()
+        pass
 
     def __call__(self, event: TelegramObject, raw_state: str | None = None) -> bool:
         return raw_state in type(self).__all_states_names__

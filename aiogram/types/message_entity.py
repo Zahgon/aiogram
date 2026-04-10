@@ -71,6 +71,4 @@ class MessageEntity(MutableTelegramObject):
             )
 
     def extract_from(self, text: str) -> str:
-        return remove_surrogates(
-            add_surrogates(text)[self.offset * 2 : (self.offset + self.length) * 2]
-        )
+        pass

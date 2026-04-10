@@ -93,16 +93,4 @@ class CallbackQuery(TelegramObject):
         :param cache_time: The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to 0.
         :return: instance of method :class:`aiogram.methods.answer_callback_query.AnswerCallbackQuery`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import AnswerCallbackQuery
-
-        return AnswerCallbackQuery(
-            callback_query_id=self.id,
-            text=text,
-            show_alert=show_alert,
-            url=url,
-            cache_time=cache_time,
-            **kwargs,
-        ).as_(self._bot)
+        pass

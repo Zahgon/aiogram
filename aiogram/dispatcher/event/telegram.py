@@ -42,18 +42,10 @@ class TelegramEventObserver:
 
         :param filters: positional filters
         """
-        if self._handler.filters is None:
-            self._handler.filters = []
-        self._handler.filters.extend([FilterObject(filter_) for filter_ in filters])
+        pass
 
     def _resolve_middlewares(self) -> list[MiddlewareType[TelegramObject]]:
-        middlewares: list[MiddlewareType[TelegramObject]] = []
-        for router in reversed(tuple(self.router.chain_head)):
-            observer = router.observers.get(self.event_name)
-            if observer:
-                middlewares.extend(observer.middleware)
-
-        return middlewares
+        pass
 
     def register(
         self,
@@ -65,33 +57,7 @@ class TelegramEventObserver:
         """
         Register event handler
         """
-        if kwargs:
-            msg = (
-                "Passing any additional keyword arguments to the registrar method "
-                "is not supported.\n"
-                "This error may be caused when you are trying to register filters like in 2.x "
-                "version of this framework, if it's true just look at correspoding "
-                "documentation pages.\n"
-                f"Please remove the {set(kwargs.keys())} arguments from this call.\n"
-            )
-            raise UnsupportedKeywordArgument(msg)
-
-        if flags is None:
-            flags = {}
-
-        for item in filters:
-            if isinstance(item, Filter):
-                item.update_handler_flags(flags=flags)
-
-        self.handlers.append(
-            HandlerObject(
-                callback=callback,
-                filters=[FilterObject(filter_) for filter_ in filters],
-                flags=flags,
-            ),
-        )
-
-        return callback
+        pass
 
     def wrap_outer_middleware(
         self,
@@ -99,35 +65,17 @@ class TelegramEventObserver:
         event: TelegramObject,
         data: dict[str, Any],
     ) -> Any:
-        wrapped_outer = self.middleware.wrap_middlewares(
-            self.outer_middleware,
-            callback,
-        )
-        return wrapped_outer(event, data)
+        pass
 
     def check_root_filters(self, event: TelegramObject, **kwargs: Any) -> Any:
-        return self._handler.check(event, **kwargs)
+        pass
 
     async def trigger(self, event: TelegramObject, **kwargs: Any) -> Any:
         """
         Propagate event to handlers and stops propagation on first match.
         Handler will be called when all its filters are pass.
         """
-        for handler in self.handlers:
-            kwargs["handler"] = handler
-            result, data = await handler.check(event, **kwargs)
-            if result:
-                kwargs.update(data)
-                try:
-                    wrapped_inner = self.outer_middleware.wrap_middlewares(
-                        self._resolve_middlewares(),
-                        handler.call,
-                    )
-                    return await wrapped_inner(event, kwargs)
-                except SkipHandler:
-                    continue
-
-        return UNHANDLED
+        pass
 
     def __call__(
         self,
@@ -140,7 +88,6 @@ class TelegramEventObserver:
         """
 
         def wrapper(callback: CallbackType) -> CallbackType:
-            self.register(callback, *filters, flags=flags, **kwargs)
-            return callback
+            pass
 
         return wrapper

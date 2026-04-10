@@ -20,7 +20,7 @@ class Default:
 
     @property
     def name(self) -> str:
-        return self._name
+        pass
 
     def __str__(self) -> str:
         return f"Default({self._name!r})"

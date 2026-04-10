@@ -165,60 +165,11 @@ class Update(TelegramObject):
 
         :return:
         """
-        if self.message:
-            return "message"
-        if self.edited_message:
-            return "edited_message"
-        if self.channel_post:
-            return "channel_post"
-        if self.edited_channel_post:
-            return "edited_channel_post"
-        if self.inline_query:
-            return "inline_query"
-        if self.chosen_inline_result:
-            return "chosen_inline_result"
-        if self.callback_query:
-            return "callback_query"
-        if self.shipping_query:
-            return "shipping_query"
-        if self.pre_checkout_query:
-            return "pre_checkout_query"
-        if self.poll:
-            return "poll"
-        if self.poll_answer:
-            return "poll_answer"
-        if self.my_chat_member:
-            return "my_chat_member"
-        if self.chat_member:
-            return "chat_member"
-        if self.chat_join_request:
-            return "chat_join_request"
-        if self.message_reaction:
-            return "message_reaction"
-        if self.message_reaction_count:
-            return "message_reaction_count"
-        if self.chat_boost:
-            return "chat_boost"
-        if self.removed_chat_boost:
-            return "removed_chat_boost"
-        if self.deleted_business_messages:
-            return "deleted_business_messages"
-        if self.business_connection:
-            return "business_connection"
-        if self.edited_business_message:
-            return "edited_business_message"
-        if self.business_message:
-            return "business_message"
-        if self.purchased_paid_media:
-            return "purchased_paid_media"
-        if self.managed_bot:
-            return "managed_bot"
-
-        raise UpdateTypeLookupError("Update does not contain any known event type.")
+        pass
 
     @property
     def event(self) -> TelegramObject:
-        return cast(TelegramObject, getattr(self, self.event_type))
+        pass
 
 
 class UpdateTypeLookupError(LookupError):

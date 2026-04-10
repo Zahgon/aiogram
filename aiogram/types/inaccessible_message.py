@@ -125,36 +125,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_message.SendMessage`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendMessage
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendMessage(
-            chat_id=self.chat.id,
-            text=text,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            parse_mode=parse_mode,
-            entities=entities,
-            link_preview_options=link_preview_options,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            disable_web_page_preview=disable_web_page_preview,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply(
         self,
@@ -203,35 +174,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param disable_web_page_preview: Disables link previews for links in this message
         :return: instance of method :class:`aiogram.methods.send_message.SendMessage`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendMessage
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendMessage(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            text=text,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            parse_mode=parse_mode,
-            entities=entities,
-            link_preview_options=link_preview_options,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            disable_web_page_preview=disable_web_page_preview,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_animation(
         self,
@@ -293,41 +236,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_animation.SendAnimation`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendAnimation
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendAnimation(
-            chat_id=self.chat.id,
-            animation=animation,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_animation(
         self,
@@ -386,40 +295,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_animation.SendAnimation`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendAnimation
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendAnimation(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            animation=animation,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_audio(
         self,
@@ -478,39 +354,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_audio.SendAudio`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendAudio
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendAudio(
-            chat_id=self.chat.id,
-            audio=audio,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            performer=performer,
-            title=title,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_audio(
         self,
@@ -566,38 +410,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_audio.SendAudio`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendAudio
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendAudio(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            audio=audio,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            performer=performer,
-            title=title,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_contact(
         self,
@@ -647,35 +460,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_contact.SendContact`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendContact
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendContact(
-            chat_id=self.chat.id,
-            phone_number=phone_number,
-            first_name=first_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            last_name=last_name,
-            vcard=vcard,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_contact(
         self,
@@ -722,34 +507,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_contact.SendContact`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendContact
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendContact(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            phone_number=phone_number,
-            first_name=first_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            last_name=last_name,
-            vcard=vcard,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_document(
         self,
@@ -803,37 +561,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_document.SendDocument`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendDocument
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendDocument(
-            chat_id=self.chat.id,
-            document=document,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            disable_content_type_detection=disable_content_type_detection,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_document(
         self,
@@ -884,36 +612,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_document.SendDocument`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendDocument
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendDocument(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            document=document,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            disable_content_type_detection=disable_content_type_detection,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_game(
         self,
@@ -953,30 +652,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_game.SendGame`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendGame
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendGame(
-            chat_id=self.chat.id,
-            game_short_name=game_short_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_game(
         self,
@@ -1013,29 +689,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_game.SendGame`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendGame
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendGame(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            game_short_name=game_short_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_invoice(
         self,
@@ -1117,51 +771,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_invoice.SendInvoice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendInvoice
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendInvoice(
-            chat_id=self.chat.id,
-            title=title,
-            description=description,
-            payload=payload,
-            currency=currency,
-            prices=prices,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            provider_token=provider_token,
-            max_tip_amount=max_tip_amount,
-            suggested_tip_amounts=suggested_tip_amounts,
-            start_parameter=start_parameter,
-            provider_data=provider_data,
-            photo_url=photo_url,
-            photo_size=photo_size,
-            photo_width=photo_width,
-            photo_height=photo_height,
-            need_name=need_name,
-            need_phone_number=need_phone_number,
-            need_email=need_email,
-            need_shipping_address=need_shipping_address,
-            send_phone_number_to_provider=send_phone_number_to_provider,
-            send_email_to_provider=send_email_to_provider,
-            is_flexible=is_flexible,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_invoice(
         self,
@@ -1240,50 +850,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_invoice.SendInvoice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendInvoice
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendInvoice(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            title=title,
-            description=description,
-            payload=payload,
-            currency=currency,
-            prices=prices,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            provider_token=provider_token,
-            max_tip_amount=max_tip_amount,
-            suggested_tip_amounts=suggested_tip_amounts,
-            start_parameter=start_parameter,
-            provider_data=provider_data,
-            photo_url=photo_url,
-            photo_size=photo_size,
-            photo_width=photo_width,
-            photo_height=photo_height,
-            need_name=need_name,
-            need_phone_number=need_phone_number,
-            need_email=need_email,
-            need_shipping_address=need_shipping_address,
-            send_phone_number_to_provider=send_phone_number_to_provider,
-            send_email_to_provider=send_email_to_provider,
-            is_flexible=is_flexible,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_location(
         self,
@@ -1337,37 +904,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_location.SendLocation`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendLocation
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendLocation(
-            chat_id=self.chat.id,
-            latitude=latitude,
-            longitude=longitude,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            horizontal_accuracy=horizontal_accuracy,
-            live_period=live_period,
-            heading=heading,
-            proximity_alert_radius=proximity_alert_radius,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_location(
         self,
@@ -1418,36 +955,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_location.SendLocation`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendLocation
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendLocation(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            latitude=latitude,
-            longitude=longitude,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            horizontal_accuracy=horizontal_accuracy,
-            live_period=live_period,
-            heading=heading,
-            proximity_alert_radius=proximity_alert_radius,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_media_group(
         self,
@@ -1487,30 +995,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the messages are a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_media_group.SendMediaGroup`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendMediaGroup
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendMediaGroup(
-            chat_id=self.chat.id,
-            media=media,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_media_group(
         self,
@@ -1547,29 +1032,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_media_group.SendMediaGroup`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendMediaGroup
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendMediaGroup(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            media=media,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_photo(
         self,
@@ -1623,37 +1086,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_photo.SendPhoto`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPhoto
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendPhoto(
-            chat_id=self.chat.id,
-            photo=photo,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_photo(
         self,
@@ -1704,36 +1137,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_photo.SendPhoto`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPhoto
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendPhoto(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            photo=photo,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_poll(
         self,
@@ -1815,51 +1219,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_poll.SendPoll`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPoll
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendPoll(
-            chat_id=self.chat.id,
-            question=question,
-            options=options,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            question_parse_mode=question_parse_mode,
-            question_entities=question_entities,
-            is_anonymous=is_anonymous,
-            type=type,
-            allows_multiple_answers=allows_multiple_answers,
-            allows_revoting=allows_revoting,
-            shuffle_options=shuffle_options,
-            allow_adding_options=allow_adding_options,
-            hide_results_until_closes=hide_results_until_closes,
-            correct_option_ids=correct_option_ids,
-            explanation=explanation,
-            explanation_parse_mode=explanation_parse_mode,
-            explanation_entities=explanation_entities,
-            open_period=open_period,
-            close_date=close_date,
-            is_closed=is_closed,
-            description=description,
-            description_parse_mode=description_parse_mode,
-            description_entities=description_entities,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            correct_option_id=correct_option_id,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_poll(
         self,
@@ -1938,50 +1298,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param correct_option_id: 0-based identifier of the correct answer option, required for polls in quiz mode
         :return: instance of method :class:`aiogram.methods.send_poll.SendPoll`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPoll
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendPoll(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            question=question,
-            options=options,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            question_parse_mode=question_parse_mode,
-            question_entities=question_entities,
-            is_anonymous=is_anonymous,
-            type=type,
-            allows_multiple_answers=allows_multiple_answers,
-            allows_revoting=allows_revoting,
-            shuffle_options=shuffle_options,
-            allow_adding_options=allow_adding_options,
-            hide_results_until_closes=hide_results_until_closes,
-            correct_option_ids=correct_option_ids,
-            explanation=explanation,
-            explanation_parse_mode=explanation_parse_mode,
-            explanation_entities=explanation_entities,
-            open_period=open_period,
-            close_date=close_date,
-            is_closed=is_closed,
-            description=description,
-            description_parse_mode=description_parse_mode,
-            description_entities=description_entities,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            correct_option_id=correct_option_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_dice(
         self,
@@ -2025,32 +1342,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_dice.SendDice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendDice
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendDice(
-            chat_id=self.chat.id,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_dice(
         self,
@@ -2091,31 +1383,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_dice.SendDice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendDice
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendDice(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_sticker(
         self,
@@ -2161,33 +1429,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_sticker.SendSticker`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendSticker
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendSticker(
-            chat_id=self.chat.id,
-            sticker=sticker,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_sticker(
         self,
@@ -2230,32 +1472,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_sticker.SendSticker`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendSticker
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendSticker(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            sticker=sticker,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_venue(
         self,
@@ -2313,39 +1530,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_venue.SendVenue`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVenue
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendVenue(
-            chat_id=self.chat.id,
-            latitude=latitude,
-            longitude=longitude,
-            title=title,
-            address=address,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            foursquare_id=foursquare_id,
-            foursquare_type=foursquare_type,
-            google_place_id=google_place_id,
-            google_place_type=google_place_type,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_venue(
         self,
@@ -2400,38 +1585,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_venue.SendVenue`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVenue
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendVenue(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            latitude=latitude,
-            longitude=longitude,
-            title=title,
-            address=address,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            foursquare_id=foursquare_id,
-            foursquare_type=foursquare_type,
-            google_place_id=google_place_id,
-            google_place_type=google_place_type,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_video(
         self,
@@ -2499,44 +1653,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_video.SendVideo`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVideo
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendVideo(
-            chat_id=self.chat.id,
-            video=video,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            cover=cover,
-            start_timestamp=start_timestamp,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            supports_streaming=supports_streaming,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_video(
         self,
@@ -2601,43 +1718,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_video.SendVideo`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVideo
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendVideo(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            video=video,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            cover=cover,
-            start_timestamp=start_timestamp,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            supports_streaming=supports_streaming,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_video_note(
         self,
@@ -2687,35 +1768,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_video_note.SendVideoNote`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVideoNote
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendVideoNote(
-            chat_id=self.chat.id,
-            video_note=video_note,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            length=length,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_video_note(
         self,
@@ -2762,34 +1815,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_video_note.SendVideoNote`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVideoNote
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendVideoNote(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            video_note=video_note,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            length=length,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_voice(
         self,
@@ -2841,36 +1867,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_to_message_id: If the message is a reply, ID of the original message
         :return: instance of method :class:`aiogram.methods.send_voice.SendVoice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVoice
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendVoice(
-            chat_id=self.chat.id,
-            voice=voice,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_voice(
         self,
@@ -2919,35 +1916,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param allow_sending_without_reply: Pass :code:`True` if the message should be sent even if the specified replied-to message is not found
         :return: instance of method :class:`aiogram.methods.send_voice.SendVoice`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendVoice
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendVoice(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            voice=voice,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def answer_paid_media(
         self,
@@ -2997,35 +1966,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove a reply keyboard or to force a reply from the user
         :return: instance of method :class:`aiogram.methods.send_paid_media.SendPaidMedia`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPaidMedia
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendPaidMedia(
-            chat_id=self.chat.id,
-            star_count=star_count,
-            media=media,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            payload=payload,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def reply_paid_media(
         self,
@@ -3074,35 +2015,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove a reply keyboard or to force a reply from the user
         :return: instance of method :class:`aiogram.methods.send_paid_media.SendPaidMedia`
         """
-        # DO NOT EDIT MANUALLY!!!
-        # This method was auto-generated via `butcher`
-
-        from aiogram.methods import SendPaidMedia
-
-        assert self.chat is not None, (
-            "This method can be used only if chat is present in the message."
-        )
-
-        return SendPaidMedia(
-            chat_id=self.chat.id,
-            reply_parameters=self.as_reply_parameters(),
-            star_count=star_count,
-            media=media,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            payload=payload,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_markup=reply_markup,
-            **kwargs,
-        ).as_(self._bot)
+        pass
 
     def as_reply_parameters(
         self,
@@ -3114,12 +2027,4 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         quote_entities: list[MessageEntity] | None = None,
         quote_position: int | None = None,
     ) -> ReplyParameters:
-        return ReplyParameters(
-            message_id=self.message_id,
-            chat_id=self.chat.id,
-            allow_sending_without_reply=allow_sending_without_reply,
-            quote=quote,
-            quote_parse_mode=quote_parse_mode,
-            quote_entities=quote_entities,
-            quote_position=quote_position,
-        )
+        pass

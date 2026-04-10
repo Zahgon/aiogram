@@ -11,8 +11,8 @@ class InlineQueryHandler(BaseHandler[InlineQuery], ABC):
 
     @property
     def from_user(self) -> User:
-        return self.event.from_user
+        pass
 
     @property
     def query(self) -> str:
-        return self.event.query
+        pass

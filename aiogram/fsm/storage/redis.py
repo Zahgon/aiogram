@@ -68,17 +68,13 @@ class RedisStorage(BaseStorage):
         :param kwargs: arguments to be passed to :class:`RedisStorage`
         :return: an instance of :class:`RedisStorage`
         """
-        if connection_kwargs is None:
-            connection_kwargs = {}
-        pool = ConnectionPool.from_url(url, **connection_kwargs)
-        redis = Redis(connection_pool=pool)
-        return cls(redis=redis, **kwargs)
+        pass
 
     def create_isolation(self, **kwargs: Any) -> "RedisEventIsolation":
-        return RedisEventIsolation(redis=self.redis, key_builder=self.key_builder, **kwargs)
+        pass
 
     async def close(self) -> None:
-        await self.redis.aclose(close_connection_pool=True)
+        pass
 
     async def set_state(
         self,
@@ -159,20 +155,14 @@ class RedisEventIsolation(BaseEventIsolation):
         connection_kwargs: dict[str, Any] | None = None,
         **kwargs: Any,
     ) -> "RedisEventIsolation":
-        if connection_kwargs is None:
-            connection_kwargs = {}
-        pool = ConnectionPool.from_url(url, **connection_kwargs)
-        redis = Redis(connection_pool=pool)
-        return cls(redis=redis, **kwargs)
+        pass
 
     @asynccontextmanager
     async def lock(
         self,
         key: StorageKey,
     ) -> AsyncGenerator[None, None]:
-        redis_key = self.key_builder.build(key, "lock")
-        async with self.redis.lock(name=redis_key, **self.lock_kwargs, lock_class=Lock):
-            yield None
+        pass
 
     async def close(self) -> None:
         pass

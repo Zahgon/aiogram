@@ -118,26 +118,7 @@ def check_webapp_signature(token: str, init_data: str) -> bool:
     :param init_data: data from frontend to be validated
     :return:
     """
-    try:
-        parsed_data = dict(parse_qsl(init_data, strict_parsing=True))
-    except ValueError:  # pragma: no cover
-        # Init data is not a valid query string
-        return False
-    if "hash" not in parsed_data:
-        # Hash is not present in init data
-        return False
-    hash_ = parsed_data.pop("hash")
-
-    data_check_string = "\n".join(
-        f"{k}={v}" for k, v in sorted(parsed_data.items(), key=itemgetter(0))
-    )
-    secret_key = hmac.new(key=b"WebAppData", msg=token.encode(), digestmod=hashlib.sha256)
-    calculated_hash = hmac.new(
-        key=secret_key.digest(),
-        msg=data_check_string.encode(),
-        digestmod=hashlib.sha256,
-    ).hexdigest()
-    return hmac.compare_digest(calculated_hash, hash_)
+    pass
 
 
 def parse_webapp_init_data(
@@ -155,14 +136,7 @@ def parse_webapp_init_data(
     :param loads:
     :return:
     """
-    result = {}
-    for key, value in parse_qsl(init_data):
-        if (value.startswith("[") and value.endswith("]")) or (
-            value.startswith("{") and value.endswith("}")
-        ):
-            value = loads(value)
-        result[key] = value
-    return WebAppInitData(**result)
+    pass
 
 
 def safe_parse_webapp_init_data(
@@ -181,7 +155,4 @@ def safe_parse_webapp_init_data(
     :param loads:
     :return:
     """
-    if check_webapp_signature(token, init_data):
-        return parse_webapp_init_data(init_data, loads=loads)
-    msg = "Invalid init data signature"
-    raise ValueError(msg)
+    pass

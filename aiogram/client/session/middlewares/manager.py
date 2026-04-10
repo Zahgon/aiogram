@@ -19,11 +19,10 @@ class RequestMiddlewareManager(Sequence[RequestMiddlewareType]):
         self,
         middleware: RequestMiddlewareType,
     ) -> RequestMiddlewareType:
-        self._middlewares.append(middleware)
-        return middleware
+        pass
 
     def unregister(self, middleware: RequestMiddlewareType) -> None:
-        self._middlewares.remove(middleware)
+        pass
 
     def __call__(
         self,
@@ -55,7 +54,4 @@ class RequestMiddlewareManager(Sequence[RequestMiddlewareType]):
         callback: NextRequestMiddlewareType[TelegramType],
         **kwargs: Any,
     ) -> NextRequestMiddlewareType[TelegramType]:
-        middleware = partial(callback, **kwargs)
-        for m in reversed(self._middlewares):
-            middleware = partial(m, middleware)
-        return cast(NextRequestMiddlewareType[TelegramType], middleware)
+        pass

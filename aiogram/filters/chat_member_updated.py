@@ -85,11 +85,7 @@ class _MemberStatusMarker:
 
     def check(self, *, member: ChatMember) -> bool:
         # Not all member types have `is_member` attribute
-        is_member = getattr(member, "is_member", None)
-        status = getattr(member, "status", None)
-        if self.is_member is not None and is_member != self.is_member:
-            return False
-        return self.name == status
+        pass
 
 
 class _MemberStatusGroupMarker:
@@ -150,7 +146,7 @@ class _MemberStatusGroupMarker:
         return result
 
     def check(self, *, member: ChatMember) -> bool:
-        return any(status.check(member=member) for status in self.statuses)
+        pass
 
 
 class _MemberStatusTransition:
@@ -170,7 +166,7 @@ class _MemberStatusTransition:
         return type(self)(old=self.new, new=self.old)
 
     def check(self, *, old: ChatMember, new: ChatMember) -> bool:
-        return self.old.check(member=old) and self.new.check(member=new)
+        pass
 
 
 CREATOR = _MemberStatusMarker("creator")

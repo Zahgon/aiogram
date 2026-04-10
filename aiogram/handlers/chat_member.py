@@ -11,4 +11,4 @@ class ChatMemberHandler(BaseHandler[ChatMemberUpdated], ABC):
 
     @property
     def from_user(self) -> User:
-        return self.event.from_user
+        pass

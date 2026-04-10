@@ -28,12 +28,7 @@ class BaseHandler(BaseHandlerMixin[T], ABC):
 
     @property
     def bot(self) -> Bot:
-        from aiogram import Bot
-
-        if "bot" in self.data:
-            return cast(Bot, self.data["bot"])
-        msg = "Bot instance not found in the context"
-        raise RuntimeError(msg)
+        pass
 
     @property
     def update(self) -> Update:

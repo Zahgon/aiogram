@@ -332,7 +332,7 @@ class Bot:
 
     @property
     def token(self) -> str:
-        return self.__token
+        pass
 
     @property
     def id(self) -> int:
@@ -341,7 +341,7 @@ class Bot:
 
         :return:
         """
-        return extract_bot_id(self.__token)
+        pass
 
     @asynccontextmanager
     async def context(self, auto_close: bool = True) -> AsyncIterator[Bot]:
@@ -351,11 +351,7 @@ class Bot:
         :param auto_close: close session on exit
         :return:
         """
-        try:
-            yield self
-        finally:
-            if auto_close:
-                await self.session.close()
+        pass
 
     async def me(self) -> User:
         """
@@ -363,36 +359,25 @@ class Bot:
 
         :return:
         """
-        if self._me is None:  # pragma: no cover
-            self._me = await self.get_me()
-        return self._me
+        pass
 
     @classmethod
     async def __download_file_binary_io(
         cls, destination: BinaryIO, seek: bool, stream: AsyncGenerator[bytes, None]
     ) -> BinaryIO:
-        async for chunk in stream:
-            destination.write(chunk)
-            destination.flush()
-        if seek is True:
-            destination.seek(0)
-        return destination
+        pass
 
     @classmethod
     async def __download_file(
         cls, destination: str | pathlib.Path, stream: AsyncGenerator[bytes, None]
     ) -> None:
-        async with aiofiles.open(destination, "wb") as f:
-            async for chunk in stream:
-                await f.write(chunk)
+        pass
 
     @classmethod
     async def __aiofiles_reader(
         cls, file: str | pathlib.Path, chunk_size: int = 65536
     ) -> AsyncGenerator[bytes, None]:
-        async with aiofiles.open(file, "rb") as f:
-            while chunk := await f.read(chunk_size):
-                yield chunk
+        pass
 
     async def download_file(
         self,
@@ -414,34 +399,7 @@ class Bot:
         :param chunk_size: File chunks size, defaults to 64 kb
         :param seek: Go to start of file when downloading is finished. Used only for destination with :class:`typing.BinaryIO` type, defaults to True
         """
-        if destination is None:
-            destination = io.BytesIO()
-
-        close_stream = False
-        if self.session.api.is_local:
-            stream = self.__aiofiles_reader(
-                self.session.api.wrap_local_file.to_local(file_path), chunk_size=chunk_size
-            )
-            close_stream = True
-        else:
-            url = self.session.api.file_url(self.__token, file_path)
-            stream = self.session.stream_content(
-                url=url,
-                timeout=timeout,
-                chunk_size=chunk_size,
-                raise_for_status=True,
-            )
-
-        try:
-            if isinstance(destination, (str, pathlib.Path)):
-                await self.__download_file(destination=destination, stream=stream)
-                return None
-            return await self.__download_file_binary_io(
-                destination=destination, seek=seek, stream=stream
-            )
-        finally:
-            if close_stream:
-                await stream.aclose()
+        pass
 
     async def download(
         self,
@@ -463,25 +421,7 @@ class Bot:
         :param chunk_size: File chunks size, defaults to 64 kb
         :param seek: Go to start of file when downloading is finished. Used only for destination with :class:`typing.BinaryIO` type, defaults to True
         """
-        if isinstance(file, str):
-            file_id = file
-        else:
-            # type is ignored in due to:
-            # Incompatible types in assignment (expression has type "Any | None", variable has type "str")
-            file_id = getattr(file, "file_id", None)  # type: ignore
-            if file_id is None:
-                raise TypeError("file can only be of the string or Downloadable type")
-
-        file_ = await self.get_file(file_id)
-
-        # `file_path` can be None for large files but this files can't be downloaded
-        # So we need to do type-cast
-        # https://github.com/aiogram/aiogram/pull/282/files#r394110017
-        file_path = cast(str, file_.file_path)
-
-        return await self.download_file(
-            file_path, destination=destination, timeout=timeout, chunk_size=chunk_size, seek=seek
-        )
+        pass
 
     async def __call__(self, method: TelegramMethod[T], request_timeout: int | None = None) -> T:
         """
@@ -529,13 +469,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = AddStickerToSet(
-            user_id=user_id,
-            name=name,
-            sticker=sticker,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def answer_callback_query(
         self,
@@ -561,15 +495,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Otherwise, you may use links like :code:`t.me/your_bot?start=XXXX` that open your bot with a parameter.
         """
-
-        call = AnswerCallbackQuery(
-            callback_query_id=callback_query_id,
-            text=text,
-            show_alert=show_alert,
-            url=url,
-            cache_time=cache_time,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def answer_inline_query(
         self,
@@ -601,18 +527,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, :code:`True` is returned.
         """
-
-        call = AnswerInlineQuery(
-            inline_query_id=inline_query_id,
-            results=results,
-            cache_time=cache_time,
-            is_personal=is_personal,
-            next_offset=next_offset,
-            button=button,
-            switch_pm_parameter=switch_pm_parameter,
-            switch_pm_text=switch_pm_text,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def answer_pre_checkout_query(
         self,
@@ -632,13 +547,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: **Note:** The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
         """
-
-        call = AnswerPreCheckoutQuery(
-            pre_checkout_query_id=pre_checkout_query_id,
-            ok=ok,
-            error_message=error_message,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def answer_shipping_query(
         self,
@@ -660,14 +569,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, :code:`True` is returned.
         """
-
-        call = AnswerShippingQuery(
-            shipping_query_id=shipping_query_id,
-            ok=ok,
-            shipping_options=shipping_options,
-            error_message=error_message,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def answer_web_app_query(
         self,
@@ -685,12 +587,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, a :class:`aiogram.types.sent_web_app_message.SentWebAppMessage` object is returned.
         """
-
-        call = AnswerWebAppQuery(
-            web_app_query_id=web_app_query_id,
-            result=result,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def approve_chat_join_request(
         self,
@@ -708,12 +605,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = ApproveChatJoinRequest(
-            chat_id=chat_id,
-            user_id=user_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def ban_chat_member(
         self,
@@ -735,14 +627,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = BanChatMember(
-            chat_id=chat_id,
-            user_id=user_id,
-            until_date=until_date,
-            revoke_messages=revoke_messages,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def ban_chat_sender_chat(
         self,
@@ -760,12 +645,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = BanChatSenderChat(
-            chat_id=chat_id,
-            sender_chat_id=sender_chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def close(
         self,
@@ -779,9 +659,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Requires no parameters.
         """
-
-        call = Close()
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def close_forum_topic(
         self,
@@ -799,12 +677,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = CloseForumTopic(
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def copy_message(
         self,
@@ -856,29 +729,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the :class:`aiogram.types.message_id.MessageId` of the sent message on success.
         """
-
-        call = CopyMessage(
-            chat_id=chat_id,
-            from_chat_id=from_chat_id,
-            message_id=message_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            video_start_timestamp=video_start_timestamp,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def create_chat_invite_link(
         self,
@@ -902,15 +753,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the new invite link as :class:`aiogram.types.chat_invite_link.ChatInviteLink` object.
         """
-
-        call = CreateChatInviteLink(
-            chat_id=chat_id,
-            name=name,
-            expire_date=expire_date,
-            member_limit=member_limit,
-            creates_join_request=creates_join_request,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def create_forum_topic(
         self,
@@ -932,14 +775,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns information about the created topic as a :class:`aiogram.types.forum_topic.ForumTopic` object.
         """
-
-        call = CreateForumTopic(
-            chat_id=chat_id,
-            name=name,
-            icon_color=icon_color,
-            icon_custom_emoji_id=icon_custom_emoji_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def create_invoice_link(
         self,
@@ -997,32 +833,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the created invoice link as *String* on success.
         """
-
-        call = CreateInvoiceLink(
-            title=title,
-            description=description,
-            payload=payload,
-            currency=currency,
-            prices=prices,
-            business_connection_id=business_connection_id,
-            provider_token=provider_token,
-            subscription_period=subscription_period,
-            max_tip_amount=max_tip_amount,
-            suggested_tip_amounts=suggested_tip_amounts,
-            provider_data=provider_data,
-            photo_url=photo_url,
-            photo_size=photo_size,
-            photo_width=photo_width,
-            photo_height=photo_height,
-            need_name=need_name,
-            need_phone_number=need_phone_number,
-            need_email=need_email,
-            need_shipping_address=need_shipping_address,
-            send_phone_number_to_provider=send_phone_number_to_provider,
-            send_email_to_provider=send_email_to_provider,
-            is_flexible=is_flexible,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def create_new_sticker_set(
         self,
@@ -1050,17 +861,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = CreateNewStickerSet(
-            user_id=user_id,
-            name=name,
-            title=title,
-            stickers=stickers,
-            sticker_type=sticker_type,
-            needs_repainting=needs_repainting,
-            sticker_format=sticker_format,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def decline_chat_join_request(
         self,
@@ -1078,12 +879,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeclineChatJoinRequest(
-            chat_id=chat_id,
-            user_id=user_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_chat_photo(
         self,
@@ -1099,11 +895,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteChatPhoto(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_chat_sticker_set(
         self,
@@ -1119,11 +911,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteChatStickerSet(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_forum_topic(
         self,
@@ -1141,12 +929,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteForumTopic(
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_message(
         self,
@@ -1184,12 +967,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Use this method to delete a message, including service messages, with the following limitations:
         """
-
-        call = DeleteMessage(
-            chat_id=chat_id,
-            message_id=message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_my_commands(
         self,
@@ -1207,12 +985,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteMyCommands(
-            scope=scope,
-            language_code=language_code,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_sticker_from_set(
         self,
@@ -1228,11 +1001,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteStickerFromSet(
-            sticker=sticker,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_webhook(
         self,
@@ -1248,11 +1017,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteWebhook(
-            drop_pending_updates=drop_pending_updates,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_chat_invite_link(
         self,
@@ -1278,16 +1043,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the edited invite link as a :class:`aiogram.types.chat_invite_link.ChatInviteLink` object.
         """
-
-        call = EditChatInviteLink(
-            chat_id=chat_id,
-            invite_link=invite_link,
-            name=name,
-            expire_date=expire_date,
-            member_limit=member_limit,
-            creates_join_request=creates_join_request,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_forum_topic(
         self,
@@ -1309,14 +1065,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = EditForumTopic(
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-            name=name,
-            icon_custom_emoji_id=icon_custom_emoji_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_message_caption(
         self,
@@ -1348,19 +1097,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
         """
-
-        call = EditMessageCaption(
-            business_connection_id=business_connection_id,
-            chat_id=chat_id,
-            message_id=message_id,
-            inline_message_id=inline_message_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            reply_markup=reply_markup,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_message_live_location(
         self,
@@ -1396,21 +1133,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, if the edited message is not an inline message, the edited :class:`aiogram.types.message.Message` is returned, otherwise :code:`True` is returned.
         """
-
-        call = EditMessageLiveLocation(
-            latitude=latitude,
-            longitude=longitude,
-            business_connection_id=business_connection_id,
-            chat_id=chat_id,
-            message_id=message_id,
-            inline_message_id=inline_message_id,
-            live_period=live_period,
-            horizontal_accuracy=horizontal_accuracy,
-            heading=heading,
-            proximity_alert_radius=proximity_alert_radius,
-            reply_markup=reply_markup,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_message_media(
         self,
@@ -1436,16 +1159,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
         """
-
-        call = EditMessageMedia(
-            media=media,
-            business_connection_id=business_connection_id,
-            chat_id=chat_id,
-            message_id=message_id,
-            inline_message_id=inline_message_id,
-            reply_markup=reply_markup,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_message_reply_markup(
         self,
@@ -1469,15 +1183,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
         """
-
-        call = EditMessageReplyMarkup(
-            business_connection_id=business_connection_id,
-            chat_id=chat_id,
-            message_id=message_id,
-            inline_message_id=inline_message_id,
-            reply_markup=reply_markup,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_message_text(
         self,
@@ -1511,20 +1217,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
         """
-
-        call = EditMessageText(
-            text=text,
-            business_connection_id=business_connection_id,
-            chat_id=chat_id,
-            message_id=message_id,
-            inline_message_id=inline_message_id,
-            parse_mode=parse_mode,
-            entities=entities,
-            link_preview_options=link_preview_options,
-            reply_markup=reply_markup,
-            disable_web_page_preview=disable_web_page_preview,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def export_chat_invite_link(
         self,
@@ -1542,11 +1235,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: If your bot needs to generate a new primary invite link replacing its previous one, use :class:`aiogram.methods.export_chat_invite_link.ExportChatInviteLink` again.
         """
-
-        call = ExportChatInviteLink(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def forward_message(
         self,
@@ -1580,20 +1269,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = ForwardMessage(
-            chat_id=chat_id,
-            from_chat_id=from_chat_id,
-            message_id=message_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            video_start_timestamp=video_start_timestamp,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_chat(
         self,
@@ -1609,11 +1285,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns a :class:`aiogram.types.chat_full_info.ChatFullInfo` object on success.
         """
-
-        call = GetChat(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_chat_administrators(
         self,
@@ -1629,11 +1301,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns an Array of :class:`aiogram.types.chat_member.ChatMember` objects.
         """
-
-        call = GetChatAdministrators(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_chat_member(
         self,
@@ -1651,12 +1319,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns a :class:`aiogram.types.chat_member.ChatMember` object on success.
         """
-
-        call = GetChatMember(
-            chat_id=chat_id,
-            user_id=user_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_chat_member_count(
         self,
@@ -1672,11 +1335,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns *Int* on success.
         """
-
-        call = GetChatMemberCount(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_chat_menu_button(
         self,
@@ -1692,11 +1351,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.menu_button.MenuButton` on success.
         """
-
-        call = GetChatMenuButton(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_custom_emoji_stickers(
         self,
@@ -1712,11 +1367,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns an Array of :class:`aiogram.types.sticker.Sticker` objects.
         """
-
-        call = GetCustomEmojiStickers(
-            custom_emoji_ids=custom_emoji_ids,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_file(
         self,
@@ -1733,11 +1384,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: You should save the file's MIME type and name (if available) when the File object is received.
         """
-
-        call = GetFile(
-            file_id=file_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_forum_topic_icon_stickers(
         self,
@@ -1751,9 +1398,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns an Array of :class:`aiogram.types.sticker.Sticker` objects.
         """
-
-        call = GetForumTopicIconStickers()
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_game_high_scores(
         self,
@@ -1777,14 +1422,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Please note that this behavior is subject to change.
         """
-
-        call = GetGameHighScores(
-            user_id=user_id,
-            chat_id=chat_id,
-            message_id=message_id,
-            inline_message_id=inline_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_me(
         self,
@@ -1798,9 +1436,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns basic information about the bot in form of a :class:`aiogram.types.user.User` object.
         """
-
-        call = GetMe()
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_my_commands(
         self,
@@ -1818,12 +1454,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: If commands aren't set, an empty list is returned.
         """
-
-        call = GetMyCommands(
-            scope=scope,
-            language_code=language_code,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_my_default_administrator_rights(
         self,
@@ -1839,11 +1470,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.chat_administrator_rights.ChatAdministratorRights` on success.
         """
-
-        call = GetMyDefaultAdministratorRights(
-            for_channels=for_channels,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_sticker_set(
         self,
@@ -1859,11 +1486,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, a :class:`aiogram.types.sticker_set.StickerSet` object is returned.
         """
-
-        call = GetStickerSet(
-            name=name,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_updates(
         self,
@@ -1891,14 +1514,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns an Array of :class:`aiogram.types.update.Update` objects.
         """
-
-        call = GetUpdates(
-            offset=offset,
-            limit=limit,
-            timeout=timeout,
-            allowed_updates=allowed_updates,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_user_profile_photos(
         self,
@@ -1918,13 +1534,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns a :class:`aiogram.types.user_profile_photos.UserProfilePhotos` object.
         """
-
-        call = GetUserProfilePhotos(
-            user_id=user_id,
-            offset=offset,
-            limit=limit,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_webhook_info(
         self,
@@ -1938,9 +1548,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: If the bot is using :class:`aiogram.methods.get_updates.GetUpdates`, will return an object with the *url* field empty.
         """
-
-        call = GetWebhookInfo()
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def leave_chat(
         self,
@@ -1956,11 +1564,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = LeaveChat(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def log_out(
         self,
@@ -1974,9 +1578,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Requires no parameters.
         """
-
-        call = LogOut()
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def pin_chat_message(
         self,
@@ -1998,14 +1600,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = PinChatMessage(
-            chat_id=chat_id,
-            message_id=message_id,
-            business_connection_id=business_connection_id,
-            disable_notification=disable_notification,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def promote_chat_member(
         self,
@@ -2057,29 +1652,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = PromoteChatMember(
-            chat_id=chat_id,
-            user_id=user_id,
-            is_anonymous=is_anonymous,
-            can_manage_chat=can_manage_chat,
-            can_delete_messages=can_delete_messages,
-            can_manage_video_chats=can_manage_video_chats,
-            can_restrict_members=can_restrict_members,
-            can_promote_members=can_promote_members,
-            can_change_info=can_change_info,
-            can_invite_users=can_invite_users,
-            can_post_stories=can_post_stories,
-            can_edit_stories=can_edit_stories,
-            can_delete_stories=can_delete_stories,
-            can_post_messages=can_post_messages,
-            can_edit_messages=can_edit_messages,
-            can_pin_messages=can_pin_messages,
-            can_manage_topics=can_manage_topics,
-            can_manage_direct_messages=can_manage_direct_messages,
-            can_manage_tags=can_manage_tags,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def reopen_forum_topic(
         self,
@@ -2097,12 +1670,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = ReopenForumTopic(
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def restrict_chat_member(
         self,
@@ -2126,15 +1694,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = RestrictChatMember(
-            chat_id=chat_id,
-            user_id=user_id,
-            permissions=permissions,
-            use_independent_chat_permissions=use_independent_chat_permissions,
-            until_date=until_date,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def revoke_chat_invite_link(
         self,
@@ -2152,12 +1712,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the revoked invite link as :class:`aiogram.types.chat_invite_link.ChatInviteLink` object.
         """
-
-        call = RevokeChatInviteLink(
-            chat_id=chat_id,
-            invite_link=invite_link,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_animation(
         self,
@@ -2217,33 +1772,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
         """
-
-        call = SendAnimation(
-            chat_id=chat_id,
-            animation=animation,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_audio(
         self,
@@ -2300,31 +1829,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
         """
-
-        call = SendAudio(
-            chat_id=chat_id,
-            audio=audio,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            performer=performer,
-            title=title,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_chat_action(
         self,
@@ -2350,14 +1855,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: The user will see a 'sending photo' status for the bot.
         """
-
-        call = SendChatAction(
-            chat_id=chat_id,
-            action=action,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_contact(
         self,
@@ -2405,27 +1903,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendContact(
-            chat_id=chat_id,
-            phone_number=phone_number,
-            first_name=first_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            last_name=last_name,
-            vcard=vcard,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_dice(
         self,
@@ -2467,24 +1945,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendDice(
-            chat_id=chat_id,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_document(
         self,
@@ -2536,29 +1997,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
         """
-
-        call = SendDocument(
-            chat_id=chat_id,
-            document=document,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            thumbnail=thumbnail,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            disable_content_type_detection=disable_content_type_detection,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_game(
         self,
@@ -2596,22 +2035,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendGame(
-            chat_id=chat_id,
-            game_short_name=game_short_name,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_invoice(
         self,
@@ -2691,43 +2115,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendInvoice(
-            chat_id=chat_id,
-            title=title,
-            description=description,
-            payload=payload,
-            currency=currency,
-            prices=prices,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            provider_token=provider_token,
-            max_tip_amount=max_tip_amount,
-            suggested_tip_amounts=suggested_tip_amounts,
-            start_parameter=start_parameter,
-            provider_data=provider_data,
-            photo_url=photo_url,
-            photo_size=photo_size,
-            photo_width=photo_width,
-            photo_height=photo_height,
-            need_name=need_name,
-            need_phone_number=need_phone_number,
-            need_email=need_email,
-            need_shipping_address=need_shipping_address,
-            send_phone_number_to_provider=send_phone_number_to_provider,
-            send_email_to_provider=send_email_to_provider,
-            is_flexible=is_flexible,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_location(
         self,
@@ -2779,29 +2167,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendLocation(
-            chat_id=chat_id,
-            latitude=latitude,
-            longitude=longitude,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            horizontal_accuracy=horizontal_accuracy,
-            live_period=live_period,
-            heading=heading,
-            proximity_alert_radius=proximity_alert_radius,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_media_group(
         self,
@@ -2839,22 +2205,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, an array of :class:`aiogram.types.message.Message` objects that were sent is returned.
         """
-
-        call = SendMediaGroup(
-            chat_id=chat_id,
-            media=media,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_message(
         self,
@@ -2904,28 +2255,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendMessage(
-            chat_id=chat_id,
-            text=text,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            parse_mode=parse_mode,
-            entities=entities,
-            link_preview_options=link_preview_options,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            disable_web_page_preview=disable_web_page_preview,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_photo(
         self,
@@ -2977,29 +2307,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendPhoto(
-            chat_id=chat_id,
-            photo=photo,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_poll(
         self,
@@ -3079,43 +2387,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendPoll(
-            chat_id=chat_id,
-            question=question,
-            options=options,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            question_parse_mode=question_parse_mode,
-            question_entities=question_entities,
-            is_anonymous=is_anonymous,
-            type=type,
-            allows_multiple_answers=allows_multiple_answers,
-            allows_revoting=allows_revoting,
-            shuffle_options=shuffle_options,
-            allow_adding_options=allow_adding_options,
-            hide_results_until_closes=hide_results_until_closes,
-            correct_option_ids=correct_option_ids,
-            explanation=explanation,
-            explanation_parse_mode=explanation_parse_mode,
-            explanation_entities=explanation_entities,
-            open_period=open_period,
-            close_date=close_date,
-            is_closed=is_closed,
-            description=description,
-            description_parse_mode=description_parse_mode,
-            description_entities=description_entities,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            correct_option_id=correct_option_id,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_sticker(
         self,
@@ -3159,25 +2431,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendSticker(
-            chat_id=chat_id,
-            sticker=sticker,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            emoji=emoji,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_venue(
         self,
@@ -3233,31 +2487,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendVenue(
-            chat_id=chat_id,
-            latitude=latitude,
-            longitude=longitude,
-            title=title,
-            address=address,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            foursquare_id=foursquare_id,
-            foursquare_type=foursquare_type,
-            google_place_id=google_place_id,
-            google_place_type=google_place_type,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_video(
         self,
@@ -3323,36 +2553,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
         """
-
-        call = SendVideo(
-            chat_id=chat_id,
-            video=video,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            width=width,
-            height=height,
-            thumbnail=thumbnail,
-            cover=cover,
-            start_timestamp=start_timestamp,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            has_spoiler=has_spoiler,
-            supports_streaming=supports_streaming,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_video_note(
         self,
@@ -3400,27 +2601,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendVideoNote(
-            chat_id=chat_id,
-            video_note=video_note,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            duration=duration,
-            length=length,
-            thumbnail=thumbnail,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_voice(
         self,
@@ -3470,28 +2651,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
         """
-
-        call = SendVoice(
-            chat_id=chat_id,
-            voice=voice,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            duration=duration,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            message_effect_id=message_effect_id,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-            allow_sending_without_reply=allow_sending_without_reply,
-            reply_to_message_id=reply_to_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_chat_administrator_custom_title(
         self,
@@ -3511,13 +2671,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetChatAdministratorCustomTitle(
-            chat_id=chat_id,
-            user_id=user_id,
-            custom_title=custom_title,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_chat_description(
         self,
@@ -3535,12 +2689,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetChatDescription(
-            chat_id=chat_id,
-            description=description,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_chat_menu_button(
         self,
@@ -3558,12 +2707,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetChatMenuButton(
-            chat_id=chat_id,
-            menu_button=menu_button,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_chat_permissions(
         self,
@@ -3583,13 +2727,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetChatPermissions(
-            chat_id=chat_id,
-            permissions=permissions,
-            use_independent_chat_permissions=use_independent_chat_permissions,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_chat_photo(
         self,
@@ -3607,12 +2745,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetChatPhoto(
-            chat_id=chat_id,
-            photo=photo,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_chat_sticker_set(
         self,
@@ -3630,12 +2763,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetChatStickerSet(
-            chat_id=chat_id,
-            sticker_set_name=sticker_set_name,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_chat_title(
         self,
@@ -3653,12 +2781,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetChatTitle(
-            chat_id=chat_id,
-            title=title,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_game_score(
         self,
@@ -3686,17 +2809,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns an error, if the new score is not greater than the user's current score in the chat and *force* is :code:`False`.
         """
-
-        call = SetGameScore(
-            user_id=user_id,
-            score=score,
-            force=force,
-            disable_edit_message=disable_edit_message,
-            chat_id=chat_id,
-            message_id=message_id,
-            inline_message_id=inline_message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_my_commands(
         self,
@@ -3716,13 +2829,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetMyCommands(
-            commands=commands,
-            scope=scope,
-            language_code=language_code,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_my_default_administrator_rights(
         self,
@@ -3740,12 +2847,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetMyDefaultAdministratorRights(
-            rights=rights,
-            for_channels=for_channels,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_passport_data_errors(
         self,
@@ -3764,12 +2866,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Supply some details in the error message to make sure the user knows how to correct the issues.
         """
-
-        call = SetPassportDataErrors(
-            user_id=user_id,
-            errors=errors,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_sticker_position_in_set(
         self,
@@ -3787,12 +2884,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetStickerPositionInSet(
-            sticker=sticker,
-            position=position,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_webhook(
         self,
@@ -3830,17 +2922,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Please upload as InputFile, sending a String will not work.
         """
-
-        call = SetWebhook(
-            url=url,
-            certificate=certificate,
-            ip_address=ip_address,
-            max_connections=max_connections,
-            allowed_updates=allowed_updates,
-            drop_pending_updates=drop_pending_updates,
-            secret_token=secret_token,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def stop_message_live_location(
         self,
@@ -3864,15 +2946,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, if the message is not an inline message, the edited :class:`aiogram.types.message.Message` is returned, otherwise :code:`True` is returned.
         """
-
-        call = StopMessageLiveLocation(
-            business_connection_id=business_connection_id,
-            chat_id=chat_id,
-            message_id=message_id,
-            inline_message_id=inline_message_id,
-            reply_markup=reply_markup,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def stop_poll(
         self,
@@ -3894,14 +2968,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the stopped :class:`aiogram.types.poll.Poll` is returned.
         """
-
-        call = StopPoll(
-            chat_id=chat_id,
-            message_id=message_id,
-            business_connection_id=business_connection_id,
-            reply_markup=reply_markup,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def unban_chat_member(
         self,
@@ -3921,13 +2988,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = UnbanChatMember(
-            chat_id=chat_id,
-            user_id=user_id,
-            only_if_banned=only_if_banned,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def unban_chat_sender_chat(
         self,
@@ -3945,12 +3006,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = UnbanChatSenderChat(
-            chat_id=chat_id,
-            sender_chat_id=sender_chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def unpin_all_chat_messages(
         self,
@@ -3966,11 +3022,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = UnpinAllChatMessages(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def unpin_all_forum_topic_messages(
         self,
@@ -3988,12 +3040,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = UnpinAllForumTopicMessages(
-            chat_id=chat_id,
-            message_thread_id=message_thread_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def unpin_chat_message(
         self,
@@ -4013,13 +3060,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = UnpinChatMessage(
-            chat_id=chat_id,
-            business_connection_id=business_connection_id,
-            message_id=message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def upload_sticker_file(
         self,
@@ -4039,13 +3080,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the uploaded :class:`aiogram.types.file.File` on success.
         """
-
-        call = UploadStickerFile(
-            user_id=user_id,
-            sticker=sticker,
-            sticker_format=sticker_format,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def close_general_forum_topic(
         self,
@@ -4061,11 +3096,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = CloseGeneralForumTopic(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_general_forum_topic(
         self,
@@ -4083,12 +3114,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = EditGeneralForumTopic(
-            chat_id=chat_id,
-            name=name,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def hide_general_forum_topic(
         self,
@@ -4104,11 +3130,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = HideGeneralForumTopic(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def reopen_general_forum_topic(
         self,
@@ -4124,11 +3146,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = ReopenGeneralForumTopic(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def unhide_general_forum_topic(
         self,
@@ -4144,11 +3162,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = UnhideGeneralForumTopic(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_sticker_set(
         self,
@@ -4164,11 +3178,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteStickerSet(
-            name=name,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_my_description(
         self,
@@ -4184,11 +3194,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.bot_description.BotDescription` on success.
         """
-
-        call = GetMyDescription(
-            language_code=language_code,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_my_short_description(
         self,
@@ -4204,11 +3210,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.bot_short_description.BotShortDescription` on success.
         """
-
-        call = GetMyShortDescription(
-            language_code=language_code,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_custom_emoji_sticker_set_thumbnail(
         self,
@@ -4226,12 +3228,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetCustomEmojiStickerSetThumbnail(
-            name=name,
-            custom_emoji_id=custom_emoji_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_my_description(
         self,
@@ -4249,12 +3246,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetMyDescription(
-            description=description,
-            language_code=language_code,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_my_short_description(
         self,
@@ -4272,12 +3264,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetMyShortDescription(
-            short_description=short_description,
-            language_code=language_code,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_sticker_emoji_list(
         self,
@@ -4295,12 +3282,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetStickerEmojiList(
-            sticker=sticker,
-            emoji_list=emoji_list,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_sticker_keywords(
         self,
@@ -4318,12 +3300,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetStickerKeywords(
-            sticker=sticker,
-            keywords=keywords,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_sticker_mask_position(
         self,
@@ -4341,12 +3318,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetStickerMaskPosition(
-            sticker=sticker,
-            mask_position=mask_position,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_sticker_set_thumbnail(
         self,
@@ -4368,14 +3340,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetStickerSetThumbnail(
-            name=name,
-            user_id=user_id,
-            format=format,
-            thumbnail=thumbnail,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_sticker_set_title(
         self,
@@ -4393,12 +3358,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetStickerSetTitle(
-            name=name,
-            title=title,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_my_name(
         self,
@@ -4414,11 +3374,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.bot_name.BotName` on success.
         """
-
-        call = GetMyName(
-            language_code=language_code,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_my_name(
         self,
@@ -4436,12 +3392,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetMyName(
-            name=name,
-            language_code=language_code,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def unpin_all_general_forum_topic_messages(
         self,
@@ -4457,11 +3408,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = UnpinAllGeneralForumTopicMessages(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def copy_messages(
         self,
@@ -4491,18 +3438,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, an array of :class:`aiogram.types.message_id.MessageId` of the sent messages is returned.
         """
-
-        call = CopyMessages(
-            chat_id=chat_id,
-            from_chat_id=from_chat_id,
-            message_ids=message_ids,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            remove_caption=remove_caption,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_messages(
         self,
@@ -4520,12 +3456,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteMessages(
-            chat_id=chat_id,
-            message_ids=message_ids,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def forward_messages(
         self,
@@ -4553,17 +3484,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, an array of :class:`aiogram.types.message_id.MessageId` of the sent messages is returned.
         """
-
-        call = ForwardMessages(
-            chat_id=chat_id,
-            from_chat_id=from_chat_id,
-            message_ids=message_ids,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_user_chat_boosts(
         self,
@@ -4581,12 +3502,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns a :class:`aiogram.types.user_chat_boosts.UserChatBoosts` object.
         """
-
-        call = GetUserChatBoosts(
-            chat_id=chat_id,
-            user_id=user_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_message_reaction(
         self,
@@ -4608,14 +3524,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetMessageReaction(
-            chat_id=chat_id,
-            message_id=message_id,
-            reaction=reaction,
-            is_big=is_big,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_business_connection(
         self,
@@ -4631,11 +3540,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns a :class:`aiogram.types.business_connection.BusinessConnection` object on success.
         """
-
-        call = GetBusinessConnection(
-            business_connection_id=business_connection_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def replace_sticker_in_set(
         self,
@@ -4657,14 +3562,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = ReplaceStickerInSet(
-            user_id=user_id,
-            name=name,
-            old_sticker=old_sticker,
-            sticker=sticker,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def refund_star_payment(
         self,
@@ -4682,12 +3580,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = RefundStarPayment(
-            user_id=user_id,
-            telegram_payment_charge_id=telegram_payment_charge_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_star_transactions(
         self,
@@ -4705,12 +3598,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, returns a :class:`aiogram.types.star_transactions.StarTransactions` object.
         """
-
-        call = GetStarTransactions(
-            offset=offset,
-            limit=limit,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_paid_media(
         self,
@@ -4758,27 +3646,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendPaidMedia(
-            chat_id=chat_id,
-            star_count=star_count,
-            media=media,
-            business_connection_id=business_connection_id,
-            message_thread_id=message_thread_id,
-            direct_messages_topic_id=direct_messages_topic_id,
-            payload=payload,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            show_caption_above_media=show_caption_above_media,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            allow_paid_broadcast=allow_paid_broadcast,
-            suggested_post_parameters=suggested_post_parameters,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def create_chat_subscription_invite_link(
         self,
@@ -4800,14 +3668,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the new invite link as a :class:`aiogram.types.chat_invite_link.ChatInviteLink` object.
         """
-
-        call = CreateChatSubscriptionInviteLink(
-            chat_id=chat_id,
-            subscription_period=subscription_period,
-            subscription_price=subscription_price,
-            name=name,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_chat_subscription_invite_link(
         self,
@@ -4827,13 +3688,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the edited invite link as a :class:`aiogram.types.chat_invite_link.ChatInviteLink` object.
         """
-
-        call = EditChatSubscriptionInviteLink(
-            chat_id=chat_id,
-            invite_link=invite_link,
-            name=name,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_user_star_subscription(
         self,
@@ -4853,13 +3708,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = EditUserStarSubscription(
-            user_id=user_id,
-            telegram_payment_charge_id=telegram_payment_charge_id,
-            is_canceled=is_canceled,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_available_gifts(
         self,
@@ -4873,9 +3722,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns a :class:`aiogram.types.gifts.Gifts` object.
         """
-
-        call = GetAvailableGifts()
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def save_prepared_inline_message(
         self,
@@ -4901,16 +3748,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns a :class:`aiogram.types.prepared_inline_message.PreparedInlineMessage` object.
         """
-
-        call = SavePreparedInlineMessage(
-            user_id=user_id,
-            result=result,
-            allow_user_chats=allow_user_chats,
-            allow_bot_chats=allow_bot_chats,
-            allow_group_chats=allow_group_chats,
-            allow_channel_chats=allow_channel_chats,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_gift(
         self,
@@ -4938,17 +3776,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SendGift(
-            gift_id=gift_id,
-            user_id=user_id,
-            chat_id=chat_id,
-            pay_for_upgrade=pay_for_upgrade,
-            text=text,
-            text_parse_mode=text_parse_mode,
-            text_entities=text_entities,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_user_emoji_status(
         self,
@@ -4968,13 +3796,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetUserEmojiStatus(
-            user_id=user_id,
-            emoji_status_custom_emoji_id=emoji_status_custom_emoji_id,
-            emoji_status_expiration_date=emoji_status_expiration_date,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def remove_chat_verification(
         self,
@@ -4990,11 +3812,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = RemoveChatVerification(
-            chat_id=chat_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def remove_user_verification(
         self,
@@ -5010,11 +3828,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = RemoveUserVerification(
-            user_id=user_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def verify_chat(
         self,
@@ -5032,12 +3846,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = VerifyChat(
-            chat_id=chat_id,
-            custom_description=custom_description,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def verify_user(
         self,
@@ -5055,12 +3864,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = VerifyUser(
-            user_id=user_id,
-            custom_description=custom_description,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def convert_gift_to_stars(
         self,
@@ -5078,12 +3882,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = ConvertGiftToStars(
-            business_connection_id=business_connection_id,
-            owned_gift_id=owned_gift_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_business_messages(
         self,
@@ -5101,12 +3900,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteBusinessMessages(
-            business_connection_id=business_connection_id,
-            message_ids=message_ids,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def delete_story(
         self,
@@ -5124,12 +3918,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeleteStory(
-            business_connection_id=business_connection_id,
-            story_id=story_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_story(
         self,
@@ -5157,17 +3946,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.story.Story` on success.
         """
-
-        call = EditStory(
-            business_connection_id=business_connection_id,
-            story_id=story_id,
-            content=content,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            areas=areas,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_business_account_gifts(
         self,
@@ -5205,22 +3984,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.owned_gifts.OwnedGifts` on success.
         """
-
-        call = GetBusinessAccountGifts(
-            business_connection_id=business_connection_id,
-            exclude_unsaved=exclude_unsaved,
-            exclude_saved=exclude_saved,
-            exclude_unlimited=exclude_unlimited,
-            exclude_limited_upgradable=exclude_limited_upgradable,
-            exclude_limited_non_upgradable=exclude_limited_non_upgradable,
-            exclude_unique=exclude_unique,
-            exclude_from_blockchain=exclude_from_blockchain,
-            sort_by_price=sort_by_price,
-            offset=offset,
-            limit=limit,
-            exclude_limited=exclude_limited,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_business_account_star_balance(
         self,
@@ -5236,11 +4000,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.star_amount.StarAmount` on success.
         """
-
-        call = GetBusinessAccountStarBalance(
-            business_connection_id=business_connection_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def gift_premium_subscription(
         self,
@@ -5266,16 +4026,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = GiftPremiumSubscription(
-            user_id=user_id,
-            month_count=month_count,
-            star_count=star_count,
-            text=text,
-            text_parse_mode=text_parse_mode,
-            text_entities=text_entities,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def post_story(
         self,
@@ -5307,19 +4058,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.story.Story` on success.
         """
-
-        call = PostStory(
-            business_connection_id=business_connection_id,
-            content=content,
-            active_period=active_period,
-            caption=caption,
-            parse_mode=parse_mode,
-            caption_entities=caption_entities,
-            areas=areas,
-            post_to_chat_page=post_to_chat_page,
-            protect_content=protect_content,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def read_business_message(
         self,
@@ -5339,13 +4078,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = ReadBusinessMessage(
-            business_connection_id=business_connection_id,
-            chat_id=chat_id,
-            message_id=message_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def remove_business_account_profile_photo(
         self,
@@ -5363,12 +4096,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = RemoveBusinessAccountProfilePhoto(
-            business_connection_id=business_connection_id,
-            is_public=is_public,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_business_account_bio(
         self,
@@ -5386,12 +4114,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetBusinessAccountBio(
-            business_connection_id=business_connection_id,
-            bio=bio,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_business_account_gift_settings(
         self,
@@ -5411,13 +4134,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetBusinessAccountGiftSettings(
-            business_connection_id=business_connection_id,
-            show_gift_button=show_gift_button,
-            accepted_gift_types=accepted_gift_types,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_business_account_name(
         self,
@@ -5437,13 +4154,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetBusinessAccountName(
-            business_connection_id=business_connection_id,
-            first_name=first_name,
-            last_name=last_name,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_business_account_profile_photo(
         self,
@@ -5463,13 +4174,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetBusinessAccountProfilePhoto(
-            business_connection_id=business_connection_id,
-            photo=photo,
-            is_public=is_public,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_business_account_username(
         self,
@@ -5487,12 +4192,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetBusinessAccountUsername(
-            business_connection_id=business_connection_id,
-            username=username,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def transfer_business_account_stars(
         self,
@@ -5510,12 +4210,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = TransferBusinessAccountStars(
-            business_connection_id=business_connection_id,
-            star_count=star_count,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def transfer_gift(
         self,
@@ -5537,14 +4232,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = TransferGift(
-            business_connection_id=business_connection_id,
-            owned_gift_id=owned_gift_id,
-            new_owner_chat_id=new_owner_chat_id,
-            star_count=star_count,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def upgrade_gift(
         self,
@@ -5566,14 +4254,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = UpgradeGift(
-            business_connection_id=business_connection_id,
-            owned_gift_id=owned_gift_id,
-            keep_original_details=keep_original_details,
-            star_count=star_count,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def edit_message_checklist(
         self,
@@ -5597,15 +4278,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the edited :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = EditMessageChecklist(
-            business_connection_id=business_connection_id,
-            chat_id=chat_id,
-            message_id=message_id,
-            checklist=checklist,
-            reply_markup=reply_markup,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_my_star_balance(
         self,
@@ -5619,9 +4292,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, returns a :class:`aiogram.types.star_amount.StarAmount` object.
         """
-
-        call = GetMyStarBalance()
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_checklist(
         self,
@@ -5651,18 +4322,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: On success, the sent :class:`aiogram.types.message.Message` is returned.
         """
-
-        call = SendChecklist(
-            business_connection_id=business_connection_id,
-            chat_id=chat_id,
-            checklist=checklist,
-            disable_notification=disable_notification,
-            protect_content=protect_content,
-            message_effect_id=message_effect_id,
-            reply_parameters=reply_parameters,
-            reply_markup=reply_markup,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def approve_suggested_post(
         self,
@@ -5682,13 +4342,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = ApproveSuggestedPost(
-            chat_id=chat_id,
-            message_id=message_id,
-            send_date=send_date,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def decline_suggested_post(
         self,
@@ -5708,13 +4362,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = DeclineSuggestedPost(
-            chat_id=chat_id,
-            message_id=message_id,
-            comment=comment,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_chat_gifts(
         self,
@@ -5750,21 +4398,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.owned_gifts.OwnedGifts` on success.
         """
-
-        call = GetChatGifts(
-            chat_id=chat_id,
-            exclude_unsaved=exclude_unsaved,
-            exclude_saved=exclude_saved,
-            exclude_unlimited=exclude_unlimited,
-            exclude_limited_upgradable=exclude_limited_upgradable,
-            exclude_limited_non_upgradable=exclude_limited_non_upgradable,
-            exclude_from_blockchain=exclude_from_blockchain,
-            exclude_unique=exclude_unique,
-            sort_by_price=sort_by_price,
-            offset=offset,
-            limit=limit,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_user_gifts(
         self,
@@ -5796,19 +4430,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.owned_gifts.OwnedGifts` on success.
         """
-
-        call = GetUserGifts(
-            user_id=user_id,
-            exclude_unlimited=exclude_unlimited,
-            exclude_limited_upgradable=exclude_limited_upgradable,
-            exclude_limited_non_upgradable=exclude_limited_non_upgradable,
-            exclude_from_blockchain=exclude_from_blockchain,
-            exclude_unique=exclude_unique,
-            sort_by_price=sort_by_price,
-            offset=offset,
-            limit=limit,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def repost_story(
         self,
@@ -5834,16 +4456,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :class:`aiogram.types.story.Story` on success.
         """
-
-        call = RepostStory(
-            business_connection_id=business_connection_id,
-            from_chat_id=from_chat_id,
-            from_story_id=from_story_id,
-            active_period=active_period,
-            post_to_chat_page=post_to_chat_page,
-            protect_content=protect_content,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def send_message_draft(
         self,
@@ -5869,16 +4482,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SendMessageDraft(
-            chat_id=chat_id,
-            draft_id=draft_id,
-            text=text,
-            message_thread_id=message_thread_id,
-            parse_mode=parse_mode,
-            entities=entities,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_user_profile_audios(
         self,
@@ -5898,13 +4502,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns a :class:`aiogram.types.user_profile_audios.UserProfileAudios` object.
         """
-
-        call = GetUserProfileAudios(
-            user_id=user_id,
-            offset=offset,
-            limit=limit,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def remove_my_profile_photo(
         self,
@@ -5918,9 +4516,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = RemoveMyProfilePhoto()
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_my_profile_photo(
         self,
@@ -5936,11 +4532,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetMyProfilePhoto(
-            photo=photo,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def set_chat_member_tag(
         self,
@@ -5960,13 +4552,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns :code:`True` on success.
         """
-
-        call = SetChatMemberTag(
-            chat_id=chat_id,
-            user_id=user_id,
-            tag=tag,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def get_managed_bot_token(
         self,
@@ -5982,11 +4568,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the token as *String* on success.
         """
-
-        call = GetManagedBotToken(
-            user_id=user_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def replace_managed_bot_token(
         self,
@@ -6002,11 +4584,7 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns the new token as *String* on success.
         """
-
-        call = ReplaceManagedBotToken(
-            user_id=user_id,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass
 
     async def save_prepared_keyboard_button(
         self,
@@ -6024,9 +4602,4 @@ class Bot:
         :param request_timeout: Request timeout
         :return: Returns a :class:`aiogram.types.prepared_keyboard_button.PreparedKeyboardButton` object.
         """
-
-        call = SavePreparedKeyboardButton(
-            user_id=user_id,
-            button=button,
-        )
-        return await self(call, request_timeout=request_timeout)
+        pass

@@ -39,26 +39,23 @@ class CallbackAnswer:
         """
         Deactivate answering for this handler
         """
-        self.disabled = True
+        pass
 
     @property
     def disabled(self) -> bool:
         """Indicates that automatic answer is disabled in this handler"""
-        return self._disabled
+        pass
 
     @disabled.setter
     def disabled(self, value: bool) -> None:
-        if self._answered:
-            msg = "Can't change disabled state after answer"
-            raise CallbackAnswerException(msg)
-        self._disabled = value
+        pass
 
     @property
     def answered(self) -> bool:
         """
         Indicates that request is already answered by middleware
         """
-        return self._answered
+        pass
 
     @property
     def text(self) -> str | None:
@@ -66,56 +63,44 @@ class CallbackAnswer:
         Response text
         :return:
         """
-        return self._text
+        pass
 
     @text.setter
     def text(self, value: str | None) -> None:
-        if self._answered:
-            msg = "Can't change text after answer"
-            raise CallbackAnswerException(msg)
-        self._text = value
+        pass
 
     @property
     def show_alert(self) -> bool | None:
         """
         Whether to display an alert
         """
-        return self._show_alert
+        pass
 
     @show_alert.setter
     def show_alert(self, value: bool | None) -> None:
-        if self._answered:
-            msg = "Can't change show_alert after answer"
-            raise CallbackAnswerException(msg)
-        self._show_alert = value
+        pass
 
     @property
     def url(self) -> str | None:
         """
         Game url
         """
-        return self._url
+        pass
 
     @url.setter
     def url(self, value: str | None) -> None:
-        if self._answered:
-            msg = "Can't change url after answer"
-            raise CallbackAnswerException(msg)
-        self._url = value
+        pass
 
     @property
     def cache_time(self) -> int | None:
         """
         Response cache time
         """
-        return self._cache_time
+        pass
 
     @cache_time.setter
     def cache_time(self, value: int | None) -> None:
-        if self._answered:
-            msg = "Can't change cache_time after answer"
-            raise CallbackAnswerException(msg)
-        self._cache_time = value
+        pass
 
     def __str__(self) -> str:
         args = ", ".join(
@@ -183,36 +168,7 @@ class CallbackAnswerMiddleware(BaseMiddleware):
         self,
         properties: dict[str, Any] | bool | None,
     ) -> CallbackAnswer:
-        pre, disabled, text, show_alert, url, cache_time = (
-            self.pre,
-            False,
-            self.text,
-            self.show_alert,
-            self.url,
-            self.cache_time,
-        )
-        if isinstance(properties, dict):
-            pre = properties.get("pre", pre)
-            disabled = properties.get("disabled", disabled)
-            text = properties.get("text", text)
-            show_alert = properties.get("show_alert", show_alert)
-            url = properties.get("url", url)
-            cache_time = properties.get("cache_time", cache_time)
-
-        return CallbackAnswer(
-            answered=pre,
-            disabled=disabled,
-            text=text,
-            show_alert=show_alert,
-            url=url,
-            cache_time=cache_time,
-        )
+        pass
 
     def answer(self, event: CallbackQuery, callback_answer: CallbackAnswer) -> AnswerCallbackQuery:
-        loggers.middlewares.info("Answer to callback query id=%s", event.id)
-        return event.answer(
-            text=callback_answer.text,
-            show_alert=callback_answer.show_alert,
-            url=callback_answer.url,
-            cache_time=callback_answer.cache_time,
-        )
+        pass

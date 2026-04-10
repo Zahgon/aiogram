@@ -19,11 +19,10 @@ class MiddlewareManager(Sequence[MiddlewareType[TelegramObject]]):
         self,
         middleware: MiddlewareType[TelegramObject],
     ) -> MiddlewareType[TelegramObject]:
-        self._middlewares.append(middleware)
-        return middleware
+        pass
 
     def unregister(self, middleware: MiddlewareType[TelegramObject]) -> None:
-        self._middlewares.remove(middleware)
+        pass
 
     def __call__(
         self,
@@ -59,10 +58,4 @@ class MiddlewareManager(Sequence[MiddlewareType[TelegramObject]]):
         handler: CallbackType,
     ) -> NextMiddlewareType[MiddlewareEventType]:
         @functools.wraps(handler)
-        def handler_wrapper(event: TelegramObject, kwargs: dict[str, Any]) -> Any:
-            return handler(event, **kwargs)
-
-        middleware = handler_wrapper
-        for m in reversed(middlewares):
-            middleware = functools.partial(m, middleware)  # type: ignore[assignment]
-        return middleware
+        pass

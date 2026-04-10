@@ -62,7 +62,7 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
 
         :return:
         """
-        yield from chain.from_iterable(self.export())
+        pass
 
     def _validate_button(self, button: ButtonType) -> bool:
         """
@@ -71,11 +71,7 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
         :param button:
         :return:
         """
-        allowed = self._button_type
-        if not isinstance(button, allowed):
-            msg = f"{button!r} should be type {allowed.__name__!r} not {type(button).__name__!r}"
-            raise ValueError(msg)
-        return True
+        pass
 
     def _validate_buttons(self, *buttons: ButtonType) -> bool:
         """
@@ -84,7 +80,7 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
         :param buttons:
         :return:
         """
-        return all(map(self._validate_button, buttons))
+        pass
 
     def _validate_row(self, row: list[ButtonType]) -> bool:
         """
@@ -94,17 +90,7 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
         :param row:
         :return:
         """
-        if not isinstance(row, list):
-            msg = (
-                f"Row {row!r} should be type 'list[{self._button_type.__name__}]' "
-                f"not type {type(row).__name__}"
-            )
-            raise ValueError(msg)
-        if len(row) > self.max_width:
-            msg = f"Row {row!r} is too long (max width: {self.max_width})"
-            raise ValueError(msg)
-        self._validate_buttons(*row)
-        return True
+        pass
 
     def _validate_markup(self, markup: list[list[ButtonType]]) -> bool:
         """
@@ -114,20 +100,7 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
         :param markup:
         :return:
         """
-        count = 0
-        if not isinstance(markup, list):
-            msg = (
-                f"Markup should be type 'list[list[{self._button_type.__name__}]]' "
-                f"not type {type(markup).__name__!r}"
-            )
-            raise ValueError(msg)
-        for row in markup:
-            self._validate_row(row)
-            count += len(row)
-        if count > self.max_buttons:
-            msg = f"Too much buttons detected Max allowed count - {self.max_buttons}"
-            raise ValueError(msg)
-        return True
+        pass
 
     def _validate_size(self, size: Any) -> int:
         """
@@ -136,13 +109,7 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
         :param size:
         :return:
         """
-        if not isinstance(size, int):
-            msg = "Only int sizes are allowed"
-            raise ValueError(msg)
-        if size not in range(self.min_width, self.max_width + 1):
-            msg = f"Row size {size} is not allowed, range: [{self.min_width}, {self.max_width}]"
-            raise ValueError(msg)
-        return size
+        pass
 
     def export(self) -> list[list[ButtonType]]:
         """
@@ -165,26 +132,7 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
         :param buttons:
         :return:
         """
-        self._validate_buttons(*buttons)
-        markup = self.export()
-
-        # Try to add new buttons to the end of last row if it possible
-        if markup and len(markup[-1]) < self.max_width:
-            last_row = markup[-1]
-            pos = self.max_width - len(last_row)
-            head, buttons = buttons[:pos], buttons[pos:]
-            last_row.extend(head)
-
-        # Separate buttons to exclusive rows with max possible row width
-        if self.max_width > 0:
-            while buttons:
-                row, buttons = buttons[: self.max_width], buttons[self.max_width :]
-                markup.append(list(row))
-        else:
-            markup.append(list(buttons))
-
-        self._markup = markup
-        return self
+        pass
 
     def row(self, *buttons: ButtonType, width: int | None = None) -> KeyboardBuilder[ButtonType]:
         """
@@ -196,15 +144,7 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
         :param width:
         :return:
         """
-        if width is None:
-            width = self.max_width
-
-        self._validate_size(width)
-        self._validate_buttons(*buttons)
-        self._markup.extend(
-            list(buttons[pos : pos + width]) for pos in range(0, len(buttons), width)
-        )
-        return self
+        pass
 
     def adjust(self, *sizes: int, repeat: bool = False) -> KeyboardBuilder[ButtonType]:
         """
@@ -219,25 +159,7 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
         :param repeat:
         :return:
         """
-        if not sizes:
-            sizes = (self.max_width,)
-
-        validated_sizes = map(self._validate_size, sizes)
-        sizes_iter = repeat_all(validated_sizes) if repeat else repeat_last(validated_sizes)
-        size = next(sizes_iter)
-
-        markup = []
-        row: list[ButtonType] = []
-        for button in self.buttons:
-            if len(row) >= size:
-                markup.append(row)
-                size = next(sizes_iter)
-                row = []
-            row.append(button)
-        if row:
-            markup.append(row)
-        self._markup = markup
-        return self
+        pass
 
     def _button(self, **kwargs: Any) -> KeyboardBuilder[ButtonType]:
         """
@@ -246,48 +168,17 @@ class KeyboardBuilder(ABC, Generic[ButtonType]):
         :param kwargs:
         :return:
         """
-        if isinstance(callback_data := kwargs.get("callback_data"), CallbackData):
-            kwargs["callback_data"] = callback_data.pack()
-        button = self._button_type(**kwargs)
-        return self.add(button)
+        pass
 
     def as_markup(self, **kwargs: Any) -> InlineKeyboardMarkup | ReplyKeyboardMarkup:
-        if self._button_type is KeyboardButton:
-            keyboard = cast(list[list[KeyboardButton]], self.export())  # type: ignore
-            return ReplyKeyboardMarkup(keyboard=keyboard, **kwargs)
-        inline_keyboard = cast(list[list[InlineKeyboardButton]], self.export())  # type: ignore
-        return InlineKeyboardMarkup(inline_keyboard=inline_keyboard)
+        pass
 
     def attach(self, builder: KeyboardBuilder[ButtonType]) -> KeyboardBuilder[ButtonType]:
-        if not isinstance(builder, KeyboardBuilder):
-            msg = f"Only KeyboardBuilder can be attached, not {type(builder).__name__}"
-            raise ValueError(msg)
-        if builder._button_type is not self._button_type:
-            msg = (
-                f"Only builders with same button type can be attached, "
-                f"not {self._button_type.__name__} and {builder._button_type.__name__}"
-            )
-            raise ValueError(msg)
-        self._markup.extend(builder.export())
-        return self
+        pass
 
 
 def repeat_last(items: Iterable[T]) -> Generator[T, None, None]:
-    items_iter = iter(items)
-    try:
-        value = next(items_iter)
-    except StopIteration:  # pragma: no cover
-        # Possible case but not in place where this function is used
-        return
-    yield value
-    finished = False
-    while True:
-        if not finished:
-            try:
-                value = next(items_iter)
-            except StopIteration:
-                finished = True
-        yield value
+    pass
 
 
 class InlineKeyboardBuilder(KeyboardBuilder[InlineKeyboardButton]):
@@ -317,29 +208,11 @@ class InlineKeyboardBuilder(KeyboardBuilder[InlineKeyboardButton]):
         pay: bool | None = None,
         **kwargs: Any,
     ) -> InlineKeyboardBuilder:
-        return cast(
-            InlineKeyboardBuilder,
-            self._button(
-                text=text,
-                icon_custom_emoji_id=icon_custom_emoji_id,
-                style=style,
-                url=url,
-                callback_data=callback_data,
-                web_app=web_app,
-                login_url=login_url,
-                switch_inline_query=switch_inline_query,
-                switch_inline_query_current_chat=switch_inline_query_current_chat,
-                switch_inline_query_chosen_chat=switch_inline_query_chosen_chat,
-                copy_text=copy_text,
-                callback_game=callback_game,
-                pay=pay,
-                **kwargs,
-            ),
-        )
+        pass
 
     def as_markup(self, **kwargs: Any) -> InlineKeyboardMarkup:
         """Construct an InlineKeyboardMarkup"""
-        return cast(InlineKeyboardMarkup, super().as_markup(**kwargs))
+        pass
 
     def __init__(self, markup: list[list[InlineKeyboardButton]] | None = None) -> None:
         super().__init__(button_type=InlineKeyboardButton, markup=markup)
@@ -363,7 +236,7 @@ class InlineKeyboardBuilder(KeyboardBuilder[InlineKeyboardButton]):
         :param markup:
         :return:
         """
-        return cls(markup=markup.inline_keyboard)
+        pass
 
 
 class ReplyKeyboardBuilder(KeyboardBuilder[KeyboardButton]):
@@ -389,25 +262,11 @@ class ReplyKeyboardBuilder(KeyboardBuilder[KeyboardButton]):
         web_app: WebAppInfo | None = None,
         **kwargs: Any,
     ) -> ReplyKeyboardBuilder:
-        return cast(
-            ReplyKeyboardBuilder,
-            self._button(
-                text=text,
-                icon_custom_emoji_id=icon_custom_emoji_id,
-                style=style,
-                request_users=request_users,
-                request_chat=request_chat,
-                request_contact=request_contact,
-                request_location=request_location,
-                request_poll=request_poll,
-                web_app=web_app,
-                **kwargs,
-            ),
-        )
+        pass
 
     def as_markup(self, **kwargs: Any) -> ReplyKeyboardMarkup:
         """Construct a ReplyKeyboardMarkup"""
-        return cast(ReplyKeyboardMarkup, super().as_markup(**kwargs))
+        pass
 
     def __init__(self, markup: list[list[KeyboardButton]] | None = None) -> None:
         super().__init__(button_type=KeyboardButton, markup=markup)
@@ -428,4 +287,4 @@ class ReplyKeyboardBuilder(KeyboardBuilder[KeyboardButton]):
         :param markup:
         :return:
         """
-        return cls(markup=markup.keyboard)
+        pass

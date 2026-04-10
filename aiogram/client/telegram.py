@@ -16,10 +16,10 @@ class FilesPathWrapper(ABC):
 
 class BareFilesPathWrapper(FilesPathWrapper):
     def to_local(self, path: Path | str) -> Path | str:
-        return path
+        pass
 
     def to_server(self, path: Path | str) -> Path | str:
-        return path
+        pass
 
 
 class SimpleFilesPathWrapper(FilesPathWrapper):
@@ -34,14 +34,13 @@ class SimpleFilesPathWrapper(FilesPathWrapper):
         base2: Path | str,
         value: Path | str,
     ) -> Path:
-        relative = Path(value).relative_to(base1)
-        return base2 / relative
+        pass
 
     def to_local(self, path: Path | str) -> Path | str:
-        return self._resolve(base1=self.server_path, base2=self.local_path, value=path)
+        pass
 
     def to_server(self, path: Path | str) -> Path | str:
-        return self._resolve(base1=self.local_path, base2=self.server_path, value=path)
+        pass
 
 
 @dataclass(frozen=True)
@@ -68,7 +67,7 @@ class TelegramAPIServer:
         :param method: API method name (case insensitive)
         :return: URL
         """
-        return self.base.format(token=token, method=method)
+        pass
 
     def file_url(self, token: str, path: str | Path) -> str:
         """
@@ -78,7 +77,7 @@ class TelegramAPIServer:
         :param path: file path
         :return: URL
         """
-        return self.file.format(token=token, path=path)
+        pass
 
     @classmethod
     def from_base(cls, base: str, **kwargs: Any) -> "TelegramAPIServer":
@@ -88,12 +87,7 @@ class TelegramAPIServer:
         :param base: Base URL
         :return: instance of :class:`TelegramAPIServer`
         """
-        base = base.rstrip("/")
-        return cls(
-            base=f"{base}/bot{{token}}/{{method}}",
-            file=f"{base}/file/bot{{token}}/{{path}}",
-            **kwargs,
-        )
+        pass
 
 
 PRODUCTION = TelegramAPIServer(

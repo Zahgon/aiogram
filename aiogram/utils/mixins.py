@@ -12,11 +12,7 @@ __all__ = ("ContextInstanceMixin", "DataMixin")
 class DataMixin:
     @property
     def data(self) -> dict[str, Any]:
-        data: dict[str, Any] | None = getattr(self, "_data", None)
-        if data is None:
-            data = {}
-            self._data = data
-        return data
+        pass
 
     def __getitem__(self, key: str) -> Any:
         return self.data[key]
@@ -71,28 +67,12 @@ class ContextInstanceMixin(Generic[ContextInstance]):
         no_error: bool = True,
     ) -> ContextInstance | None:  # pragma: no cover
         # on mypy 0.770 I catch that contextvars.ContextVar always contextvars.ContextVar[Any]
-        cls.__context_instance = cast(
-            contextvars.ContextVar[ContextInstance],
-            cls.__context_instance,
-        )
-
-        try:
-            current: ContextInstance | None = cls.__context_instance.get()
-        except LookupError:
-            if no_error:
-                current = None
-            else:
-                raise
-
-        return current
+        pass
 
     @classmethod
     def set_current(cls, value: ContextInstance) -> contextvars.Token[ContextInstance]:
-        if not isinstance(value, cls):
-            msg = f"Value should be instance of {cls.__name__!r} not {type(value).__name__!r}"
-            raise TypeError(msg)
-        return cls.__context_instance.set(value)
+        pass
 
     @classmethod
     def reset_current(cls, token: contextvars.Token[ContextInstance]) -> None:
-        cls.__context_instance.reset(token)
+        pass

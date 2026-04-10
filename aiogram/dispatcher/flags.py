@@ -22,11 +22,10 @@ class FlagDecorator:
 
     @classmethod
     def _with_flag(cls, flag: Flag) -> FlagDecorator:
-        return cls(flag)
+        pass
 
     def _with_value(self, value: Any) -> FlagDecorator:
-        new_flag = Flag(self.flag.name, value)
-        return self._with_flag(new_flag)
+        pass
 
     @overload
     def __call__(self, value: Callable[..., Any], /) -> Callable[..., Any]:  # type: ignore
@@ -83,9 +82,7 @@ class FlagGenerator:
 
 
 def extract_flags_from_object(obj: Any) -> dict[str, Any]:
-    if not hasattr(obj, "aiogram_flag"):
-        return {}
-    return cast(dict[str, Any], obj.aiogram_flag)
+    pass
 
 
 def extract_flags(handler: HandlerObject | dict[str, Any]) -> dict[str, Any]:
@@ -95,11 +92,7 @@ def extract_flags(handler: HandlerObject | dict[str, Any]) -> dict[str, Any]:
     :param handler: handler object or data
     :return: dictionary with all handler flags
     """
-    if isinstance(handler, dict) and "handler" in handler:
-        handler = handler["handler"]
-    if hasattr(handler, "flags"):
-        return handler.flags
-    return {}
+    pass
 
 
 def get_flag(
@@ -116,8 +109,7 @@ def get_flag(
     :param default: default value (None)
     :return: value of the flag or default
     """
-    flags = extract_flags(handler)
-    return flags.get(name, default)
+    pass
 
 
 def check_flags(handler: HandlerObject | dict[str, Any], magic: MagicFilter) -> Any:
@@ -128,5 +120,4 @@ def check_flags(handler: HandlerObject | dict[str, Any], magic: MagicFilter) -> 
     :param magic: instance of the magic
     :return: the result of magic filter check
     """
-    flags = extract_flags(handler)
-    return magic.resolve(AttrDict(flags))
+    pass

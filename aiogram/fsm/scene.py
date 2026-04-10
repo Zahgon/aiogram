@@ -71,9 +71,7 @@ class HistoryManager:
         return MemoryStorageRecord(**history[-1])
 
     async def all(self) -> list[MemoryStorageRecord]:
-        history_data = await self._history_state.get_data()
-        history = history_data.setdefault("history", [])
-        return [MemoryStorageRecord(**item) for item in history]
+        pass
 
     async def clear(self) -> None:
         loggers.scene.debug("Clear history")
@@ -85,22 +83,10 @@ class HistoryManager:
         await self.push(state, data)
 
     async def _set_state(self, state: str | None, data: dict[str, Any]) -> None:
-        await self._state.set_state(state)
-        await self._state.set_data(data)
+        pass
 
     async def rollback(self) -> str | None:
-        previous_state = await self.pop()
-        if not previous_state:
-            await self._set_state(None, {})
-            return None
-
-        loggers.scene.debug(
-            "Rollback to state=%s data=%s",
-            previous_state.state,
-            previous_state.data,
-        )
-        await self._set_state(previous_state.state, previous_state.data)
-        return previous_state.state
+        pass
 
 
 class ObserverDecorator:
@@ -117,28 +103,10 @@ class ObserverDecorator:
         self.after = after
 
     def _wrap_filter(self, target: type[Scene] | CallbackType) -> None:
-        handlers = getattr(target, "__aiogram_handler__", None)
-        if not handlers:
-            handlers = []
-            target.__aiogram_handler__ = handlers  # type: ignore[union-attr]
-
-        handlers.append(
-            HandlerContainer(
-                name=self.name,
-                handler=target,
-                filters=self.filters,
-                after=self.after,
-            ),
-        )
+        pass
 
     def _wrap_action(self, target: CallbackType) -> None:
-        assert self.action is not None, "Scene action is not specified"
-
-        action = getattr(target, "__aiogram_action__", None)
-        if action is None:
-            action = defaultdict(dict)
-            target.__aiogram_action__ = action  # type: ignore[attr-defined]
-        action[self.action][self.name] = CallableObject(target)
+        pass
 
     def __call__(self, target: CallbackType) -> CallbackType:
         if inspect.isfunction(target):
@@ -161,7 +129,7 @@ class ObserverDecorator:
         return ActionContainer(self.name, self.filters, SceneAction.exit)
 
     def back(self) -> ActionContainer:
-        return ActionContainer(self.name, self.filters, SceneAction.back)
+        pass
 
 
 class SceneAction(Enum):
@@ -185,14 +153,7 @@ class ActionContainer:
         self.target = target
 
     async def execute(self, wizard: SceneWizard) -> None:
-        if self.action == SceneAction.enter and self.target is not None:
-            await wizard.goto(self.target)
-        elif self.action == SceneAction.leave:
-            await wizard.leave()
-        elif self.action == SceneAction.exit:
-            await wizard.exit()
-        elif self.action == SceneAction.back:
-            await wizard.back()
+        pass
 
 
 @dataclass(slots=True)
@@ -384,25 +345,7 @@ class Scene:
         :param router:
         :return:
         """
-        scene_config = cls.__scene_config__
-        used_observers = set()
-
-        for handler in scene_config.handlers:
-            router.observers[handler.name].register(
-                SceneHandlerWrapper(
-                    cls,
-                    handler.handler,
-                    after=handler.after,
-                ),
-                *handler.filters,
-                flags=extract_flags_from_object(handler.handler),
-            )
-            used_observers.add(handler.name)
-
-        for observer_name in used_observers:
-            if scene_config.callback_query_without_state and observer_name == "callback_query":
-                continue
-            router.observers[observer_name].filter(StateFilter(scene_config.state))
+        pass
 
     @classmethod
     def as_router(cls, name: str | None = None) -> Router:
@@ -411,14 +354,7 @@ class Scene:
 
         :return: new router
         """
-        if name is None:
-            name = (
-                f"Scene '{cls.__module__}.{cls.__qualname__}' "
-                f"for state {cls.__scene_config__.state!r}"
-            )
-        router = Router(name=name)
-        cls.add_to_router(router)
-        return router
+        pass
 
     @classmethod
     def as_handler(cls, **handler_kwargs: Any) -> CallbackType:
@@ -428,15 +364,7 @@ class Scene:
 
         >>> router.message.register(MyScene.as_handler(), Command("start"))
         """
-
-        async def enter_to_scene_handler(
-            event: TelegramObject,
-            scenes: ScenesManager,
-            **middleware_kwargs: Any,
-        ) -> None:
-            await scenes.enter(cls, **{**handler_kwargs, **middleware_kwargs})
-
-        return enter_to_scene_handler
+        pass
 
 
 class SceneWizard:
@@ -532,10 +460,7 @@ class SceneWizard:
         :param kwargs: Keyword arguments that can be passed to the method.
         :return: None
         """
-        loggers.scene.debug("Back to previous scene from scene %s", self.scene_config.state)
-        await self.leave(_with_history=False, **kwargs)
-        new_scene = await self.manager.history.rollback()
-        await self.manager.enter(new_scene, _check_active=False, **kwargs)
+        pass
 
     async def retake(self, **kwargs: Any) -> None:
         """
@@ -544,8 +469,7 @@ class SceneWizard:
         :param kwargs: Additional keyword arguments to pass to the scene.
         :return: None
         """
-        assert self.scene_config.state is not None, "Scene state is not specified"
-        await self.goto(self.scene_config.state, **kwargs)
+        pass
 
     async def goto(self, scene: type[Scene] | State | str, **kwargs: Any) -> None:
         """
@@ -629,7 +553,7 @@ class SceneWizard:
         """
 
     async def get_value(self, key: str, default: Any | None = None) -> Any | None:
-        return await self.state.get_value(key, default)
+        pass
 
     async def update_data(
         self,
@@ -653,7 +577,7 @@ class SceneWizard:
 
         :return: None
         """
-        await self.set_data({})
+        pass
 
 
 class ScenesManager:
@@ -737,10 +661,7 @@ class ScenesManager:
         :param kwargs: Additional keyword arguments passed to the scene's exit method.
         :return: None
         """
-        scene = await self._get_active_scene()
-        if not scene:
-            return
-        await scene.wizard.exit(**kwargs)
+        pass
 
 
 class SceneRegistry:
@@ -762,16 +683,7 @@ class SceneRegistry:
         self._setup_middleware(router)
 
     def _setup_middleware(self, router: Router) -> None:
-        if isinstance(router, Dispatcher):
-            # Small optimization for Dispatcher
-            # - we don't need to set up middleware for all observers
-            router.update.outer_middleware(self._update_middleware)
-            return
-
-        for observer in router.observers.values():
-            if observer.event_name in {"update", "error"}:
-                continue
-            observer.outer_middleware(self._middleware)
+        pass
 
     async def _update_middleware(
         self,
@@ -779,19 +691,7 @@ class SceneRegistry:
         event: TelegramObject,
         data: dict[str, Any],
     ) -> Any:
-        assert isinstance(event, Update), "Event must be an Update instance"
-        state = data.get("state")
-        if state is None:
-            return await handler(event, data)
-
-        data["scenes"] = ScenesManager(
-            registry=self,
-            update_type=event.event_type,
-            event=event.event,
-            state=state,
-            data=data,
-        )
-        return await handler(event, data)
+        pass
 
     async def _middleware(
         self,
@@ -799,19 +699,7 @@ class SceneRegistry:
         event: TelegramObject,
         data: dict[str, Any],
     ) -> Any:
-        state = data.get("state")
-        if state is None:
-            return await handler(event, data)
-
-        update: Update = data["event_update"]
-        data["scenes"] = ScenesManager(
-            registry=self,
-            update_type=update.event_type,
-            event=event,
-            state=state,
-            data=data,
-        )
-        return await handler(event, data)
+        pass
 
     def add(self, *scenes: type[Scene], router: Router | None = None) -> None:
         """
@@ -831,21 +719,7 @@ class SceneRegistry:
             to which the scenes should be added.
         :return: None
         """
-        if not scenes:
-            msg = "At least one scene must be specified"
-            raise ValueError(msg)
-
-        for scene in scenes:
-            if scene.__scene_config__.state in self._scenes:
-                msg = f"Scene with state {scene.__scene_config__.state!r} already exists"
-                raise SceneException(msg)
-
-            self._scenes[scene.__scene_config__.state] = scene
-
-            if router:
-                router.include_router(scene.as_router())
-            elif self.register_on_add:
-                self.router.include_router(scene.as_router())
+        pass
 
     def register(self, *scenes: type[Scene]) -> None:
         """
@@ -854,7 +728,7 @@ class SceneRegistry:
         :param scenes: One or more scene classes to register.
         :return: None
         """
-        self.add(*scenes, router=self.router)
+        pass
 
     def get(self, scene: type[Scene] | State | str | None) -> type[Scene]:
         """
@@ -898,7 +772,7 @@ class After:
 
     @classmethod
     def back(cls) -> After:
-        return cls(action=SceneAction.back)
+        pass
 
     @classmethod
     def goto(cls, scene: type[Scene] | State | str | None) -> After:
@@ -930,7 +804,7 @@ class ObserverMarker:
         return ObserverDecorator(self.name, (), action=SceneAction.exit)
 
     def back(self) -> ObserverDecorator:
-        return ObserverDecorator(self.name, (), action=SceneAction.back)
+        pass
 
 
 class OnMarker:

@@ -42,14 +42,7 @@ async def create_start_link(
     :param encoder: custom encoder callable
     :return: link
     """
-    username = (await bot.me()).username
-    return create_deep_link(
-        username=cast(str, username),
-        link_type="start",
-        payload=payload,
-        encode=encode,
-        encoder=encoder,
-    )
+    pass
 
 
 async def create_startgroup_link(
@@ -69,14 +62,7 @@ async def create_startgroup_link(
     :param encoder: custom encoder callable
     :return: link
     """
-    username = (await bot.me()).username
-    return create_deep_link(
-        username=cast(str, username),
-        link_type="startgroup",
-        payload=payload,
-        encode=encode,
-        encoder=encoder,
-    )
+    pass
 
 
 async def create_startapp_link(
@@ -103,15 +89,7 @@ async def create_startapp_link(
     :param encoder: custom encoder callable
     :return: link
     """
-    username = (await bot.me()).username
-    return create_deep_link(
-        username=cast(str, username),
-        link_type="startapp",
-        payload=payload,
-        app_name=app_name,
-        encode=encode,
-        encoder=encoder,
-    )
+    pass
 
 
 def create_deep_link(
@@ -133,26 +111,4 @@ def create_deep_link(
     :param encoder: custom encoder callable
     :return: deeplink
     """
-    if not isinstance(payload, str):
-        payload = str(payload)
-
-    if encode or encoder:
-        payload = encode_payload(payload, encoder=encoder)
-
-    if re.search(BAD_PATTERN, payload):
-        msg = (
-            "Wrong payload! Only A-Z, a-z, 0-9, _ and - are allowed. "
-            "Pass `encode=True` or encode payload manually."
-        )
-        raise ValueError(msg)
-
-    if len(payload) > DEEPLINK_PAYLOAD_LENGTH:
-        msg = f"Payload must be up to {DEEPLINK_PAYLOAD_LENGTH} characters long."
-        raise ValueError(msg)
-
-    if not app_name:
-        deep_link = create_telegram_link(username, **{cast(str, link_type): payload})
-    else:
-        deep_link = create_telegram_link(username, app_name, **{cast(str, link_type): payload})
-
-    return deep_link
+    pass
