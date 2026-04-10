@@ -58,4 +58,10 @@ class MiddlewareManager(Sequence[MiddlewareType[TelegramObject]]):
         handler: CallbackType,
     ) -> NextMiddlewareType[MiddlewareEventType]:
         @functools.wraps(handler)
-        pass
+        def handler_wrapper(event: TelegramObject, kwargs: dict[str, Any]) -> Any:
+            return handler(event, **kwargs)
+
+        middleware = handler_wrapper
+        for m in reversed(middlewares):
+            middleware = functools.partial(m, middleware)  # type: ignore[assignment]
+        return middleware

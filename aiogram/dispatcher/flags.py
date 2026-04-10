@@ -82,7 +82,9 @@ class FlagGenerator:
 
 
 def extract_flags_from_object(obj: Any) -> dict[str, Any]:
-    pass
+    if not hasattr(obj, "aiogram_flag"):
+        return {}
+    return cast(dict[str, Any], obj.aiogram_flag)
 
 
 def extract_flags(handler: HandlerObject | dict[str, Any]) -> dict[str, Any]:
